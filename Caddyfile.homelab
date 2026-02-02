@@ -1,0 +1,71 @@
+# Caddy Homelab 配置 - talk-web
+# 使用自签名证书的 HTTPS 配置
+
+# 替换为你的内网 IP 或主机名
+talk.home.wbsays.com {
+    # 使用自签名证书（内网 HTTPS）
+    tls internal {
+        on_demand
+    }
+
+    # 或者不使用 HTTPS
+    # tls off
+
+    # 前端 - 生产构建的静态文件
+    root * /var/www/talk-web
+    encode gzip zstd
+
+    # API 代理
+    @api {
+        path /api/*
+        path /health
+    }
+    handle @api {
+        reverse_proxy localhost:8080 {
+            header_up Host {upstream_hostport}
+            header_up X-Real-IP {remote_host}
+            header_up X-Forwarded-For {remote_host}
+
+            # 健康检查
+            health_uri /health
+            health_interval 10s
+        }
+    }
+
+    # 静态资源缓存
+    @static {
+        path *.js *.css *.png *.jpg *.jpeg *.gif *.svg *.ico *.woff *.woff2
+    }
+    handle @static {
+        header Cache-Control "public, max-age=86400"
+        file_server
+    }
+
+    # SPA 路由
+    handle {
+        try_files {path} /index.html
+        file_server
+    }
+
+    # 基本安全头
+    header {
+        X-Frame-Options "SAMEORIGIN"
+        X-Content-Type-Options "nosniff"
+        Referrer-Policy "same-origin"
+        -Server
+    }
+
+    # 日志
+    log {
+        output file /var/log/caddy/talk-web.log {
+            roll_size 10mb
+            roll_keep 5
+        }
+        format console
+    }
+}
+
+# HTTP 跳转到 HTTPS（可选）
+# http://talk.home.wbsays.com {
+#     redir https://talk.home.wbsays.com{uri}
+# }

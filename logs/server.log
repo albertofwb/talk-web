@@ -1,0 +1,443 @@
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/auth/login           --> talk-web/server/handler.(*AuthHandler).Login-fm (4 handlers)
+[GIN-debug] POST   /api/auth/logout          --> talk-web/server/handler.(*AuthHandler).Logout-fm (4 handlers)
+[GIN-debug] GET    /api/auth/me              --> talk-web/server/handler.(*AuthHandler).Me-fm (5 handlers)
+[GIN-debug] POST   /api/upload               --> talk-web/server/handler.(*UploadHandler).Upload-fm (5 handlers)
+[GIN-debug] GET    /api/admin/users          --> talk-web/server/handler.(*AdminHandler).ListUsers-fm (6 handlers)
+[GIN-debug] POST   /api/admin/users          --> talk-web/server/handler.(*AdminHandler).CreateUser-fm (6 handlers)
+[GIN-debug] PUT    /api/admin/users/:id      --> talk-web/server/handler.(*AdminHandler).UpdateUser-fm (6 handlers)
+[GIN-debug] DELETE /api/admin/users/:id      --> talk-web/server/handler.(*AdminHandler).DeleteUser-fm (6 handlers)
+[GIN-debug] GET    /health                   --> main.main.func1 (4 handlers)
+2026/02/02 11:29:59 服务启动在 :8080
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] [ERROR] listen tcp :8080: bind: address already in use
+2026/02/02 11:29:59 启动服务失败:listen tcp :8080: bind: address already in use
+exit status 1
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/auth/login           --> talk-web/server/handler.(*AuthHandler).Login-fm (4 handlers)
+[GIN-debug] POST   /api/auth/logout          --> talk-web/server/handler.(*AuthHandler).Logout-fm (4 handlers)
+[GIN-debug] GET    /api/auth/me              --> talk-web/server/handler.(*AuthHandler).Me-fm (5 handlers)
+[GIN-debug] POST   /api/upload               --> talk-web/server/handler.(*UploadHandler).Upload-fm (5 handlers)
+[GIN-debug] GET    /api/admin/users          --> talk-web/server/handler.(*AdminHandler).ListUsers-fm (6 handlers)
+[GIN-debug] POST   /api/admin/users          --> talk-web/server/handler.(*AdminHandler).CreateUser-fm (6 handlers)
+[GIN-debug] PUT    /api/admin/users/:id      --> talk-web/server/handler.(*AdminHandler).UpdateUser-fm (6 handlers)
+[GIN-debug] DELETE /api/admin/users/:id      --> talk-web/server/handler.(*AdminHandler).DeleteUser-fm (6 handlers)
+[GIN-debug] GET    /health                   --> main.main.func1 (4 handlers)
+2026/02/02 11:30:03 服务启动在 :8080
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] [ERROR] listen tcp :8080: bind: address already in use
+2026/02/02 11:30:03 启动服务失败:listen tcp :8080: bind: address already in use
+exit status 1
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/auth/login           --> talk-web/server/handler.(*AuthHandler).Login-fm (4 handlers)
+[GIN-debug] POST   /api/auth/logout          --> talk-web/server/handler.(*AuthHandler).Logout-fm (4 handlers)
+[GIN-debug] GET    /api/auth/me              --> talk-web/server/handler.(*AuthHandler).Me-fm (5 handlers)
+[GIN-debug] POST   /api/upload               --> talk-web/server/handler.(*UploadHandler).Upload-fm (5 handlers)
+[GIN-debug] GET    /api/admin/users          --> talk-web/server/handler.(*AdminHandler).ListUsers-fm (6 handlers)
+[GIN-debug] POST   /api/admin/users          --> talk-web/server/handler.(*AdminHandler).CreateUser-fm (6 handlers)
+[GIN-debug] PUT    /api/admin/users/:id      --> talk-web/server/handler.(*AdminHandler).UpdateUser-fm (6 handlers)
+[GIN-debug] DELETE /api/admin/users/:id      --> talk-web/server/handler.(*AdminHandler).DeleteUser-fm (6 handlers)
+[GIN-debug] GET    /health                   --> main.main.func1 (4 handlers)
+2026/02/02 11:35:02 服务启动在 :8080
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/auth/login           --> talk-web/server/handler.(*AuthHandler).Login-fm (4 handlers)
+[GIN-debug] POST   /api/auth/logout          --> talk-web/server/handler.(*AuthHandler).Logout-fm (4 handlers)
+[GIN-debug] GET    /api/auth/me              --> talk-web/server/handler.(*AuthHandler).Me-fm (5 handlers)
+[GIN-debug] POST   /api/upload               --> talk-web/server/handler.(*UploadHandler).Upload-fm (5 handlers)
+[GIN-debug] GET    /api/audio/:filename      --> main.main.func1 (5 handlers)
+[GIN-debug] GET    /api/admin/users          --> talk-web/server/handler.(*AdminHandler).ListUsers-fm (6 handlers)
+[GIN-debug] POST   /api/admin/users          --> talk-web/server/handler.(*AdminHandler).CreateUser-fm (6 handlers)
+[GIN-debug] PUT    /api/admin/users/:id      --> talk-web/server/handler.(*AdminHandler).UpdateUser-fm (6 handlers)
+[GIN-debug] DELETE /api/admin/users/:id      --> talk-web/server/handler.(*AdminHandler).DeleteUser-fm (6 handlers)
+[GIN-debug] GET    /health                   --> main.main.func2 (4 handlers)
+2026/02/02 11:37:45 服务启动在 :8080
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN] 2026/02/02 - 11:39:52 | 500 |  1.457140099s | fd7a:115c:a1e0::1a35:8821 | POST     "/api/upload"
+[GIN] 2026/02/02 - 11:40:00 | 500 |  1.839766252s | fd7a:115c:a1e0::1a35:8821 | POST     "/api/upload"
+[GIN] 2026/02/02 - 11:40:49 | 200 |   53.563164ms |             ::1 | POST     "/api/auth/login"
+[GIN] 2026/02/02 - 11:40:57 | 401 |      18.975µs |             ::1 | POST     "/api/upload"
+[GIN] 2026/02/02 - 11:41:09 | 200 |  4.518295801s |             ::1 | POST     "/api/upload"
+[GIN] 2026/02/02 - 11:41:18 | 404 |       1.367µs |             ::1 | HEAD     "/api/audio/xiaoxiao-1770003667.opus"
+[GIN] 2026/02/02 - 11:41:29 | 200 |    2.367221ms |             ::1 | GET      "/api/audio/xiaoxiao-1770003667.opus"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/auth/login           --> talk-web/server/handler.(*AuthHandler).Login-fm (4 handlers)
+[GIN-debug] POST   /api/auth/logout          --> talk-web/server/handler.(*AuthHandler).Logout-fm (4 handlers)
+[GIN-debug] GET    /api/auth/me              --> talk-web/server/handler.(*AuthHandler).Me-fm (5 handlers)
+[GIN-debug] POST   /api/upload               --> talk-web/server/handler.(*UploadHandler).Upload-fm (5 handlers)
+[GIN-debug] GET    /api/audio/:filename      --> main.main.func1 (5 handlers)
+[GIN-debug] GET    /api/admin/users          --> talk-web/server/handler.(*AdminHandler).ListUsers-fm (6 handlers)
+[GIN-debug] POST   /api/admin/users          --> talk-web/server/handler.(*AdminHandler).CreateUser-fm (6 handlers)
+[GIN-debug] PUT    /api/admin/users/:id      --> talk-web/server/handler.(*AdminHandler).UpdateUser-fm (6 handlers)
+[GIN-debug] DELETE /api/admin/users/:id      --> talk-web/server/handler.(*AdminHandler).DeleteUser-fm (6 handlers)
+[GIN-debug] GET    /health                   --> main.main.func2 (4 handlers)
+2026/02/02 11:42:25 服务启动在 :8080
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8080
+[STT Success] File: /tmp/talk-upload-1-1770003794.webm, Text: 措施WEB按格式识别。
+[GIN] 2026/02/02 - 11:43:18 | 200 |  4.369186918s |             ::1 | POST     "/api/upload"
+[STT Error] File: /tmp/talk-upload-1-1770003835.webm, Error: no text recognized
+[GIN] 2026/02/02 - 11:43:57 | 500 |  1.953778124s | fd7a:115c:a1e0::1a35:8821 | POST     "/api/upload"
+[STT Error] File: /tmp/talk-upload-1-1770003835.webm, Error: STT failed: exit status 1 (output: Traceback (most recent call last):
+  File "/home/albert/stt/stt.py", line 66, in <module>
+    main()
+  File "/home/albert/stt/stt.py", line 61, in main
+    text = transcribe(args.audio, args.model)
+  File "/home/albert/stt/stt.py", line 43, in transcribe
+    segments, info = model.transcribe(audio_path, language="zh")
+  File "/home/albert/stt/.venv/lib/python3.10/site-packages/faster_whisper/transcribe.py", line 876, in transcribe
+    audio = decode_audio(audio, sampling_rate=sampling_rate)
+  File "/home/albert/stt/.venv/lib/python3.10/site-packages/faster_whisper/audio.py", line 46, in decode_audio
+    with av.open(input_file, mode="r", metadata_errors="ignore") as container:
+  File "av/container/core.pyx", line 482, in av.container.core.open
+  File "av/container/core.pyx", line 298, in av.container.core.Container.__cinit__
+  File "av/container/core.pyx", line 318, in av.container.core.Container.err_check
+  File "av/error.pyx", line 424, in av.error.err_check
+av.error.FileNotFoundError: [Errno 2] No such file or directory: '/tmp/talk-upload-1-1770003835.webm'
+)
+[GIN] 2026/02/02 - 11:43:57 | 500 |  1.467899417s | fd7a:115c:a1e0::1a35:8821 | POST     "/api/upload"
+[STT Error] File: /tmp/talk-upload-1-1770003836.webm, Error: STT failed: exit status 1 (output: Traceback (most recent call last):
+  File "/home/albert/stt/stt.py", line 66, in <module>
+    main()
+  File "/home/albert/stt/stt.py", line 61, in main
+    text = transcribe(args.audio, args.model)
+  File "/home/albert/stt/stt.py", line 43, in transcribe
+    segments, info = model.transcribe(audio_path, language="zh")
+  File "/home/albert/stt/.venv/lib/python3.10/site-packages/faster_whisper/transcribe.py", line 876, in transcribe
+    audio = decode_audio(audio, sampling_rate=sampling_rate)
+  File "/home/albert/stt/.venv/lib/python3.10/site-packages/faster_whisper/audio.py", line 46, in decode_audio
+    with av.open(input_file, mode="r", metadata_errors="ignore") as container:
+  File "av/container/core.pyx", line 482, in av.container.core.open
+  File "av/container/core.pyx", line 298, in av.container.core.Container.__cinit__
+  File "av/container/core.pyx", line 318, in av.container.core.Container.err_check
+  File "av/error.pyx", line 424, in av.error.err_check
+av.error.InvalidDataError: [Errno 1094995529] Invalid data found when processing input: '/tmp/talk-upload-1-1770003836.webm'
+)
+[GIN] 2026/02/02 - 11:43:58 | 500 |  1.495564552s | fd7a:115c:a1e0::1a35:8821 | POST     "/api/upload"
+[STT Error] File: /tmp/talk-upload-1-1770003840.webm, Error: STT failed: exit status 1 (output: Traceback (most recent call last):
+  File "/home/albert/stt/stt.py", line 66, in <module>
+    main()
+  File "/home/albert/stt/stt.py", line 61, in main
+    text = transcribe(args.audio, args.model)
+  File "/home/albert/stt/stt.py", line 43, in transcribe
+    segments, info = model.transcribe(audio_path, language="zh")
+  File "/home/albert/stt/.venv/lib/python3.10/site-packages/faster_whisper/transcribe.py", line 876, in transcribe
+    audio = decode_audio(audio, sampling_rate=sampling_rate)
+  File "/home/albert/stt/.venv/lib/python3.10/site-packages/faster_whisper/audio.py", line 46, in decode_audio
+    with av.open(input_file, mode="r", metadata_errors="ignore") as container:
+  File "av/container/core.pyx", line 482, in av.container.core.open
+  File "av/container/core.pyx", line 298, in av.container.core.Container.__cinit__
+  File "av/container/core.pyx", line 318, in av.container.core.Container.err_check
+  File "av/error.pyx", line 424, in av.error.err_check
+av.error.InvalidDataError: [Errno 1094995529] Invalid data found when processing input: '/tmp/talk-upload-1-1770003840.webm'
+)
+[GIN] 2026/02/02 - 11:44:02 | 500 |  1.705720427s | fd7a:115c:a1e0::1a35:8821 | POST     "/api/upload"
+[STT Error] File: /tmp/talk-upload-1-1770003841.webm, Error: STT failed: exit status 1 (output: Traceback (most recent call last):
+  File "/home/albert/stt/stt.py", line 66, in <module>
+    main()
+  File "/home/albert/stt/stt.py", line 61, in main
+    text = transcribe(args.audio, args.model)
+  File "/home/albert/stt/stt.py", line 43, in transcribe
+    segments, info = model.transcribe(audio_path, language="zh")
+  File "/home/albert/stt/.venv/lib/python3.10/site-packages/faster_whisper/transcribe.py", line 876, in transcribe
+    audio = decode_audio(audio, sampling_rate=sampling_rate)
+  File "/home/albert/stt/.venv/lib/python3.10/site-packages/faster_whisper/audio.py", line 46, in decode_audio
+    with av.open(input_file, mode="r", metadata_errors="ignore") as container:
+  File "av/container/core.pyx", line 482, in av.container.core.open
+  File "av/container/core.pyx", line 298, in av.container.core.Container.__cinit__
+  File "av/container/core.pyx", line 318, in av.container.core.Container.err_check
+  File "av/error.pyx", line 424, in av.error.err_check
+av.error.InvalidDataError: [Errno 1094995529] Invalid data found when processing input: '/tmp/talk-upload-1-1770003841.webm'
+)
+[GIN] 2026/02/02 - 11:44:02 | 500 |  1.656498423s | fd7a:115c:a1e0::1a35:8821 | POST     "/api/upload"
+[STT Error] File: /tmp/talk-upload-1-1770003841.webm, Error: STT failed: exit status 1 (output: Traceback (most recent call last):
+  File "/home/albert/stt/stt.py", line 66, in <module>
+    main()
+  File "/home/albert/stt/stt.py", line 61, in main
+    text = transcribe(args.audio, args.model)
+  File "/home/albert/stt/stt.py", line 43, in transcribe
+    segments, info = model.transcribe(audio_path, language="zh")
+  File "/home/albert/stt/.venv/lib/python3.10/site-packages/faster_whisper/transcribe.py", line 876, in transcribe
+    audio = decode_audio(audio, sampling_rate=sampling_rate)
+  File "/home/albert/stt/.venv/lib/python3.10/site-packages/faster_whisper/audio.py", line 46, in decode_audio
+    with av.open(input_file, mode="r", metadata_errors="ignore") as container:
+  File "av/container/core.pyx", line 482, in av.container.core.open
+  File "av/container/core.pyx", line 298, in av.container.core.Container.__cinit__
+  File "av/container/core.pyx", line 318, in av.container.core.Container.err_check
+  File "av/error.pyx", line 424, in av.error.err_check
+av.error.FileNotFoundError: [Errno 2] No such file or directory: '/tmp/talk-upload-1-1770003841.webm'
+)
+[GIN] 2026/02/02 - 11:44:02 | 500 |  1.675027047s | fd7a:115c:a1e0::1a35:8821 | POST     "/api/upload"
+[STT Error] File: /tmp/talk-upload-1-1770003841.webm, Error: STT failed: exit status 1 (output: Traceback (most recent call last):
+  File "/home/albert/stt/stt.py", line 66, in <module>
+    main()
+  File "/home/albert/stt/stt.py", line 61, in main
+    text = transcribe(args.audio, args.model)
+  File "/home/albert/stt/stt.py", line 43, in transcribe
+    segments, info = model.transcribe(audio_path, language="zh")
+  File "/home/albert/stt/.venv/lib/python3.10/site-packages/faster_whisper/transcribe.py", line 876, in transcribe
+    audio = decode_audio(audio, sampling_rate=sampling_rate)
+  File "/home/albert/stt/.venv/lib/python3.10/site-packages/faster_whisper/audio.py", line 46, in decode_audio
+    with av.open(input_file, mode="r", metadata_errors="ignore") as container:
+  File "av/container/core.pyx", line 482, in av.container.core.open
+  File "av/container/core.pyx", line 298, in av.container.core.Container.__cinit__
+  File "av/container/core.pyx", line 318, in av.container.core.Container.err_check
+  File "av/error.pyx", line 424, in av.error.err_check
+av.error.FileNotFoundError: [Errno 2] No such file or directory: '/tmp/talk-upload-1-1770003841.webm'
+)
+[GIN] 2026/02/02 - 11:44:02 | 500 |  1.637397351s | fd7a:115c:a1e0::1a35:8821 | POST     "/api/upload"
+[STT Error] File: /tmp/talk-upload-1-1770003857.webm, Error: no text recognized
+[GIN] 2026/02/02 - 11:44:19 | 500 |  1.828428898s | fd7a:115c:a1e0::1a35:8821 | POST     "/api/upload"
+[STT Error] File: /tmp/talk-upload-1-1770003864.webm, Error: no text recognized
+[GIN] 2026/02/02 - 11:44:25 | 500 |  1.801434218s | fd7a:115c:a1e0::1a35:8821 | POST     "/api/upload"
+[STT Error] File: /tmp/talk-upload-1-1770004825.webm, Error: STT failed: exit status 1 (output: Traceback (most recent call last):
+  File "/home/albert/stt/stt.py", line 66, in <module>
+    main()
+  File "/home/albert/stt/stt.py", line 61, in main
+    text = transcribe(args.audio, args.model)
+  File "/home/albert/stt/stt.py", line 43, in transcribe
+    segments, info = model.transcribe(audio_path, language="zh")
+  File "/home/albert/stt/.venv/lib/python3.10/site-packages/faster_whisper/transcribe.py", line 876, in transcribe
+    audio = decode_audio(audio, sampling_rate=sampling_rate)
+  File "/home/albert/stt/.venv/lib/python3.10/site-packages/faster_whisper/audio.py", line 46, in decode_audio
+    with av.open(input_file, mode="r", metadata_errors="ignore") as container:
+  File "av/container/core.pyx", line 482, in av.container.core.open
+  File "av/container/core.pyx", line 298, in av.container.core.Container.__cinit__
+  File "av/container/core.pyx", line 318, in av.container.core.Container.err_check
+  File "av/error.pyx", line 424, in av.error.err_check
+av.error.InvalidDataError: [Errno 1094995529] Invalid data found when processing input: '/tmp/talk-upload-1-1770004825.webm'
+)
+[GIN] 2026/02/02 - 12:00:27 | 500 |  1.813736615s | fd7a:115c:a1e0::1a35:8821 | POST     "/api/upload"
+[STT Error] File: /tmp/talk-upload-1-1770005988.webm, Error: STT failed: exit status 1 (output: Traceback (most recent call last):
+  File "/home/albert/stt/stt.py", line 66, in <module>
+    main()
+  File "/home/albert/stt/stt.py", line 61, in main
+    text = transcribe(args.audio, args.model)
+  File "/home/albert/stt/stt.py", line 43, in transcribe
+    segments, info = model.transcribe(audio_path, language="zh")
+  File "/home/albert/stt/.venv/lib/python3.10/site-packages/faster_whisper/transcribe.py", line 876, in transcribe
+    audio = decode_audio(audio, sampling_rate=sampling_rate)
+  File "/home/albert/stt/.venv/lib/python3.10/site-packages/faster_whisper/audio.py", line 46, in decode_audio
+    with av.open(input_file, mode="r", metadata_errors="ignore") as container:
+  File "av/container/core.pyx", line 482, in av.container.core.open
+  File "av/container/core.pyx", line 298, in av.container.core.Container.__cinit__
+  File "av/container/core.pyx", line 318, in av.container.core.Container.err_check
+  File "av/error.pyx", line 424, in av.error.err_check
+av.error.InvalidDataError: [Errno 1094995529] Invalid data found when processing input: '/tmp/talk-upload-1-1770005988.webm'
+)
+[GIN] 2026/02/02 - 12:19:50 | 500 |  1.881512938s | fd7a:115c:a1e0::1a35:8821 | POST     "/api/upload"
+[GIN] 2026/02/02 - 12:20:16 | 200 |   64.662618ms | fd7a:115c:a1e0::1a35:8821 | POST     "/api/auth/login"
+[STT Success] File: /tmp/talk-upload-1-1770006035.webm, Text: 噢噢噢噢
+[GIN] 2026/02/02 - 12:20:39 | 200 |  4.387502546s | fd7a:115c:a1e0::1a35:8821 | POST     "/api/upload"
+[GIN] 2026/02/02 - 12:20:39 | 401 |      12.715µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/audio/xiaoxiao-1770006037.opus"
+[STT Success] File: /tmp/talk-upload-1-1770006044.webm, Text: 你已經到了嗎?
+[GIN] 2026/02/02 - 12:20:48 | 200 |  4.124586858s | fd7a:115c:a1e0::1a35:8821 | POST     "/api/upload"
+[GIN] 2026/02/02 - 12:20:48 | 401 |      11.287µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/audio/xiaoxiao-1770006045.opus"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/auth/login           --> talk-web/server/handler.(*AuthHandler).Login-fm (4 handlers)
+[GIN-debug] POST   /api/auth/logout          --> talk-web/server/handler.(*AuthHandler).Logout-fm (4 handlers)
+[GIN-debug] GET    /api/auth/me              --> talk-web/server/handler.(*AuthHandler).Me-fm (5 handlers)
+[GIN-debug] POST   /api/upload               --> talk-web/server/handler.(*UploadHandler).Upload-fm (5 handlers)
+[GIN-debug] GET    /api/audio/:filename      --> main.main.func1 (5 handlers)
+[GIN-debug] GET    /api/admin/users          --> talk-web/server/handler.(*AdminHandler).ListUsers-fm (6 handlers)
+[GIN-debug] POST   /api/admin/users          --> talk-web/server/handler.(*AdminHandler).CreateUser-fm (6 handlers)
+[GIN-debug] PUT    /api/admin/users/:id      --> talk-web/server/handler.(*AdminHandler).UpdateUser-fm (6 handlers)
+[GIN-debug] DELETE /api/admin/users/:id      --> talk-web/server/handler.(*AdminHandler).DeleteUser-fm (6 handlers)
+[GIN-debug] GET    /health                   --> main.main.func2 (4 handlers)
+2026/02/02 12:42:33 服务启动在 :8080
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8080
+signal: killed
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/auth/login           --> talk-web/server/handler.(*AuthHandler).Login-fm (4 handlers)
+[GIN-debug] POST   /api/auth/logout          --> talk-web/server/handler.(*AuthHandler).Logout-fm (4 handlers)
+[GIN-debug] GET    /api/auth/me              --> talk-web/server/handler.(*AuthHandler).Me-fm (5 handlers)
+[GIN-debug] POST   /api/upload               --> talk-web/server/handler.(*UploadHandler).Upload-fm (5 handlers)
+[GIN-debug] GET    /api/reply                --> talk-web/server/handler.(*UploadHandler).GetReply-fm (5 handlers)
+[GIN-debug] GET    /api/audio/:filename      --> main.main.func1 (5 handlers)
+[GIN-debug] GET    /api/admin/users          --> talk-web/server/handler.(*AdminHandler).ListUsers-fm (6 handlers)
+[GIN-debug] POST   /api/admin/users          --> talk-web/server/handler.(*AdminHandler).CreateUser-fm (6 handlers)
+[GIN-debug] PUT    /api/admin/users/:id      --> talk-web/server/handler.(*AdminHandler).UpdateUser-fm (6 handlers)
+[GIN-debug] DELETE /api/admin/users/:id      --> talk-web/server/handler.(*AdminHandler).DeleteUser-fm (6 handlers)
+[GIN-debug] GET    /health                   --> main.main.func2 (4 handlers)
+2026/02/02 12:49:04 服务启动在 :8080
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8080
+[STT Success] File: /tmp/talk-upload-1-1770009576.webm, Text: 你能听听我说话吗?
+[Telegram] Message sent: 你能听听我说话吗?
+[Telegram] Waiting for reply (async)...
+[GIN] 2026/02/02 - 13:19:38 | 200 |  2.237355741s | fd7a:115c:a1e0::1a35:8821 | POST     "/api/upload"
+[Telegram Error] No reply: timeout waiting for reply
+signal: killed
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/auth/login           --> talk-web/server/handler.(*AuthHandler).Login-fm (4 handlers)
+[GIN-debug] POST   /api/auth/logout          --> talk-web/server/handler.(*AuthHandler).Logout-fm (4 handlers)
+[GIN-debug] GET    /api/auth/me              --> talk-web/server/handler.(*AuthHandler).Me-fm (5 handlers)
+[GIN-debug] POST   /api/upload               --> talk-web/server/handler.(*UploadHandler).Upload-fm (5 handlers)
+[GIN-debug] GET    /api/reply                --> talk-web/server/handler.(*UploadHandler).GetReply-fm (5 handlers)
+[GIN-debug] GET    /api/history              --> talk-web/server/handler.(*UploadHandler).GetHistory-fm (5 handlers)
+[GIN-debug] GET    /api/audio/:filename      --> main.main.func1 (5 handlers)
+[GIN-debug] GET    /api/admin/users          --> talk-web/server/handler.(*AdminHandler).ListUsers-fm (6 handlers)
+[GIN-debug] POST   /api/admin/users          --> talk-web/server/handler.(*AdminHandler).CreateUser-fm (6 handlers)
+[GIN-debug] PUT    /api/admin/users/:id      --> talk-web/server/handler.(*AdminHandler).UpdateUser-fm (6 handlers)
+[GIN-debug] DELETE /api/admin/users/:id      --> talk-web/server/handler.(*AdminHandler).DeleteUser-fm (6 handlers)
+[GIN-debug] GET    /health                   --> main.main.func2 (4 handlers)
+2026/02/02 13:26:01 服务启动在 :8080
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN] 2026/02/02 - 13:27:35 | 200 |    6.137476ms | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+[GIN] 2026/02/02 - 13:27:35 | 200 |     900.529µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+[STT Success] File: /tmp/talk-upload-1-1770010063.webm, Text: 我现在测试咱们的网页版雨婴对讲机
+[Telegram] Message sent: 我现在测试咱们的网页版雨婴对讲机
+[Telegram] Waiting for reply (async)...
+[GIN] 2026/02/02 - 13:27:45 | 200 |  2.025518338s | fd7a:115c:a1e0::1a35:8821 | POST     "/api/upload"
+[GIN] 2026/02/02 - 13:27:45 | 200 |     244.883µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/reply"
+[GIN] 2026/02/02 - 13:27:46 | 200 |     186.369µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/reply"
+[GIN] 2026/02/02 - 13:27:47 | 200 |     127.691µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/reply"
+[GIN] 2026/02/02 - 13:27:48 | 200 |     579.375µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/reply"
+[GIN] 2026/02/02 - 13:27:49 | 200 |      140.03µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/reply"
+[GIN] 2026/02/02 - 13:27:51 | 200 |     485.992µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/reply"
+[GIN] 2026/02/02 - 13:27:53 | 200 |     145.248µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/reply"
+[GIN] 2026/02/02 - 13:27:55 | 200 |     185.344µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/reply"
+[GIN] 2026/02/02 - 13:27:57 | 200 |     156.776µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/reply"
+[GIN] 2026/02/02 - 13:27:59 | 200 |     572.001µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/reply"
+[GIN] 2026/02/02 - 13:28:01 | 200 |      166.21µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/reply"
+[GIN] 2026/02/02 - 13:28:03 | 200 |     190.307µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/reply"
+[GIN] 2026/02/02 - 13:28:05 | 200 |     214.924µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/reply"
+[GIN] 2026/02/02 - 13:28:07 | 200 |     150.764µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/reply"
+[GIN] 2026/02/02 - 13:28:09 | 200 |     183.855µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/reply"
+[GIN] 2026/02/02 - 13:28:11 | 200 |     148.188µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/reply"
+[GIN] 2026/02/02 - 13:28:13 | 200 |     157.022µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/reply"
+[GIN] 2026/02/02 - 13:28:15 | 200 |     492.507µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/reply"
+[GIN] 2026/02/02 - 13:28:17 | 200 |     122.959µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/reply"
+[GIN] 2026/02/02 - 13:28:19 | 200 |      138.51µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/reply"
+[GIN] 2026/02/02 - 13:28:21 | 200 |      143.44µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/reply"
+[GIN] 2026/02/02 - 13:28:23 | 200 |     147.847µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/reply"
+[GIN] 2026/02/02 - 13:28:25 | 200 |     425.398µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/reply"
+[GIN] 2026/02/02 - 13:28:27 | 200 |     461.218µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/reply"
+[GIN] 2026/02/02 - 13:28:29 | 200 |     611.587µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/reply"
+[GIN] 2026/02/02 - 13:28:31 | 200 |     555.267µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/reply"
+[GIN] 2026/02/02 - 13:28:33 | 200 |     525.485µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/reply"
+[GIN] 2026/02/02 - 13:28:35 | 200 |     670.082µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/reply"
+[GIN] 2026/02/02 - 13:28:37 | 200 |     531.842µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/reply"
+[GIN] 2026/02/02 - 13:28:39 | 200 |      578.37µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/reply"
+[GIN] 2026/02/02 - 13:28:41 | 200 |     461.121µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/reply"
+[GIN] 2026/02/02 - 13:28:43 | 200 |     528.084µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/reply"
+[Telegram Error] No reply: timeout waiting for reply
+[GIN] 2026/02/02 - 13:28:45 | 200 |     677.813µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/reply"
+[GIN] 2026/02/02 - 13:28:47 | 200 |     674.627µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/reply"
+signal: killed
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/auth/login           --> talk-web/server/handler.(*AuthHandler).Login-fm (4 handlers)
+[GIN-debug] POST   /api/auth/logout          --> talk-web/server/handler.(*AuthHandler).Logout-fm (4 handlers)
+[GIN-debug] GET    /api/auth/me              --> talk-web/server/handler.(*AuthHandler).Me-fm (5 handlers)
+[GIN-debug] POST   /api/upload               --> talk-web/server/handler.(*UploadHandler).Upload-fm (5 handlers)
+[GIN-debug] GET    /api/reply                --> talk-web/server/handler.(*UploadHandler).GetReply-fm (5 handlers)
+[GIN-debug] GET    /api/history              --> talk-web/server/handler.(*UploadHandler).GetHistory-fm (5 handlers)
+[GIN-debug] GET    /api/audio/:filename      --> main.main.func1 (5 handlers)
+[GIN-debug] GET    /api/admin/users          --> talk-web/server/handler.(*AdminHandler).ListUsers-fm (6 handlers)
+[GIN-debug] POST   /api/admin/users          --> talk-web/server/handler.(*AdminHandler).CreateUser-fm (6 handlers)
+[GIN-debug] PUT    /api/admin/users/:id      --> talk-web/server/handler.(*AdminHandler).UpdateUser-fm (6 handlers)
+[GIN-debug] DELETE /api/admin/users/:id      --> talk-web/server/handler.(*AdminHandler).DeleteUser-fm (6 handlers)
+[GIN-debug] GET    /health                   --> main.main.func2 (4 handlers)
+2026/02/02 13:30:43 服务启动在 :8080
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN] 2026/02/02 - 13:31:11 | 200 |     426.276µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/reply"
+[GIN] 2026/02/02 - 13:31:12 | 200 |     132.133µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/reply"
+[GIN] 2026/02/02 - 13:31:13 | 200 |      105.01µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/reply"
+[GIN] 2026/02/02 - 13:31:14 | 200 |     122.876µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/reply"
+[GIN] 2026/02/02 - 13:31:16 | 200 |     152.251µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/reply"
+[GIN] 2026/02/02 - 13:31:17 | 200 |     155.642µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/reply"
+[GIN] 2026/02/02 - 13:31:18 | 200 |     221.928µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/reply"
+[GIN] 2026/02/02 - 13:31:19 | 200 |     245.034µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/reply"
+[GIN] 2026/02/02 - 13:31:20 | 200 |     201.388µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/reply"
+[GIN] 2026/02/02 - 13:31:21 | 200 |     136.703µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/reply"
+[GIN] 2026/02/02 - 13:31:22 | 200 |     198.605µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/reply"
+[STT Success] File: /tmp/talk-upload-1-1770010280.webm, Text: OK,那么我现在测试一下从手机说话能否获得你的回府
+[Telegram] Message sent: from-web OK,那么我现在测试一下从手机说话能否获得你的回府
+[Telegram] Waiting for reply (async)...
+[GIN] 2026/02/02 - 13:31:22 | 200 |  2.339967303s | fd7a:115c:a1e0::1a35:8821 | POST     "/api/upload"
+[GIN] 2026/02/02 - 13:31:22 | 200 |     154.959µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/reply"
+[GIN] 2026/02/02 - 13:31:23 | 200 |     166.241µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/reply"
+signal: killed
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/auth/login           --> talk-web/server/handler.(*AuthHandler).Login-fm (4 handlers)
+[GIN-debug] POST   /api/auth/logout          --> talk-web/server/handler.(*AuthHandler).Logout-fm (4 handlers)
+[GIN-debug] GET    /api/auth/me              --> talk-web/server/handler.(*AuthHandler).Me-fm (5 handlers)
+[GIN-debug] POST   /api/upload               --> talk-web/server/handler.(*UploadHandler).Upload-fm (5 handlers)
+[GIN-debug] GET    /api/reply                --> talk-web/server/handler.(*UploadHandler).GetReply-fm (5 handlers)
+[GIN-debug] GET    /api/history              --> talk-web/server/handler.(*UploadHandler).GetHistory-fm (5 handlers)
+[GIN-debug] GET    /api/audio/:filename      --> main.main.func1 (5 handlers)
+[GIN-debug] GET    /api/admin/users          --> talk-web/server/handler.(*AdminHandler).ListUsers-fm (6 handlers)
+[GIN-debug] POST   /api/admin/users          --> talk-web/server/handler.(*AdminHandler).CreateUser-fm (6 handlers)
+[GIN-debug] PUT    /api/admin/users/:id      --> talk-web/server/handler.(*AdminHandler).UpdateUser-fm (6 handlers)
+[GIN-debug] DELETE /api/admin/users/:id      --> talk-web/server/handler.(*AdminHandler).DeleteUser-fm (6 handlers)
+[GIN-debug] GET    /health                   --> main.main.func2 (4 handlers)
+2026/02/02 13:31:25 服务启动在 :8080
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8080

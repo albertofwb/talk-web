@@ -1,0 +1,41 @@
+# talk.home.wbsays.com 域名配置
+
+# HTTP 访问（局域网）
+http://talk.home.wbsays.com {
+    # 前端代理
+    handle /* {
+        reverse_proxy localhost:5173
+    }
+
+    # API 代理
+    handle /api/* {
+        reverse_proxy localhost:8080
+    }
+
+    handle /health {
+        reverse_proxy localhost:8080
+    }
+
+    # 日志
+    log {
+        output file /var/log/caddy/talk-domain.log
+        format console
+    }
+}
+
+# HTTPS 访问（使用自签名证书）
+# https://talk.home.wbsays.com {
+#     tls internal
+#
+#     handle /* {
+#         reverse_proxy localhost:5173
+#     }
+#
+#     handle /api/* {
+#         reverse_proxy localhost:8080
+#     }
+#
+#     handle /health {
+#         reverse_proxy localhost:8080
+#     }
+# }

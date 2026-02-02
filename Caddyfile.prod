@@ -1,0 +1,100 @@
+# Caddy 生产环境配置 - talk-web
+# 使用方法: caddy run --config Caddyfile.prod
+
+# 替换为你的实际域名
+talk.yourdomain.com {
+    # 自动 HTTPS（Let's Encrypt）
+    tls your-email@example.com {
+        protocols tls1.2 tls1.3
+    }
+
+    # 前端静态文件
+    root * /var/www/talk-web
+    encode gzip zstd
+
+    # 后端 API 代理
+    @api {
+        path /api/*
+        path /health
+    }
+    handle @api {
+        reverse_proxy localhost:8080 {
+            # 传递真实 IP
+            header_up X-Real-IP {remote_host}
+            header_up X-Forwarded-For {remote_host}
+            header_up X-Forwarded-Proto {scheme}
+            header_up Host {host}
+
+            # 健康检查
+            health_uri /health
+            health_interval 10s
+            health_timeout 5s
+        }
+    }
+
+    # 静态资源缓存
+    @static {
+        path *.js *.css *.png *.jpg *.jpeg *.gif *.svg *.ico *.woff *.woff2 *.ttf *.eot
+    }
+    handle @static {
+        header Cache-Control "public, max-age=31536000, immutable"
+        file_server
+    }
+
+    # SPA 路由支持
+    handle {
+        try_files {path} /index.html
+        file_server
+    }
+
+    # 安全头
+    header {
+        # HSTS - 强制 HTTPS
+        Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+
+        # 防止点击劫持
+        X-Frame-Options "DENY"
+
+        # 防止 MIME 类型嗅探
+        X-Content-Type-Options "nosniff"
+
+        # XSS 保护
+        X-XSS-Protection "1; mode=block"
+
+        # CSP - 内容安全策略
+        Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https:; media-src 'self'; worker-src 'self' blob:;"
+
+        # Referrer 策略
+        Referrer-Policy "strict-origin-when-cross-origin"
+
+        # 权限策略
+        Permissions-Policy "geolocation=(), microphone=(self), camera=()"
+
+        # 删除服务器信息
+        -Server
+    }
+
+    # 访问日志
+    log {
+        output file /var/log/caddy/talk-web-access.log {
+            roll_size 100mb
+            roll_keep 10
+            roll_keep_for 720h
+        }
+        format json
+    }
+
+    # 错误日志
+    handle_errors {
+        @404 {
+            expression {http.error.status_code} == 404
+        }
+        rewrite @404 /index.html
+        file_server
+    }
+}
+
+# HTTP 自动跳转到 HTTPS
+http://talk.yourdomain.com {
+    redir https://talk.yourdomain.com{uri} permanent
+}

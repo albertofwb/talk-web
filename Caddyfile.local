@@ -1,0 +1,57 @@
+# Caddy 本地/内网配置 - talk-web
+# 适用于家庭网络或内网环境
+
+# HTTP 配置（内网不需要 HTTPS）
+http://talk.home.local:80, http://localhost:80, http://192.168.1.100:80 {
+    # 前端 - React 开发服务器
+    handle /* {
+        reverse_proxy localhost:5173 {
+            # WebSocket 支持（如果需要热重载）
+            header_up Host {upstream_hostport}
+            header_up X-Real-IP {remote_host}
+        }
+    }
+
+    # 后端 API
+    handle /api/* {
+        reverse_proxy localhost:8080 {
+            header_up Host {upstream_hostport}
+            header_up X-Real-IP {remote_host}
+            header_up X-Forwarded-For {remote_host}
+        }
+    }
+
+    # 健康检查
+    handle /health {
+        reverse_proxy localhost:8080
+    }
+
+    # 访问日志
+    log {
+        output file /var/log/caddy/talk-web.log {
+            roll_size 10mb
+            roll_keep 5
+        }
+        format console
+    }
+}
+
+# 如果使用生产构建（静态文件）
+# http://talk.home.local:80 {
+#     # 静态文件目录
+#     root * /var/www/talk-web
+#     encode gzip
+#
+#     # API 代理
+#     handle /api/* {
+#         reverse_proxy localhost:8080
+#     }
+#
+#     handle /health {
+#         reverse_proxy localhost:8080
+#     }
+#
+#     # SPA 路由支持
+#     try_files {path} /index.html
+#     file_server
+# }

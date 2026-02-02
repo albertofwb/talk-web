@@ -25,7 +25,7 @@ func main() {
 	}
 
 	// 自动迁移
-	if err := db.AutoMigrate(&model.User{}); err != nil {
+	if err := db.AutoMigrate(&model.User{}, &model.Message{}); err != nil {
 		log.Fatal("数据库迁移失败:", err)
 	}
 
@@ -69,7 +69,7 @@ func main() {
 	// 初始化handlers
 	authHandler := handler.NewAuthHandler(db)
 	adminHandler := handler.NewAdminHandler(db)
-	uploadHandler := handler.NewUploadHandler(cfg.TalkServerURL)
+	uploadHandler := handler.NewUploadHandler(cfg.TalkServerURL, db)
 
 	// 路由
 	api := r.Group("/api")
@@ -84,6 +84,12 @@ func main() {
 
 		// 上传音频
 		api.POST("/upload", middleware.AuthRequired(), uploadHandler.Upload)
+
+		// 轮询获取回复
+		api.GET("/reply", middleware.AuthRequired(), uploadHandler.GetReply)
+
+		// 获取历史记录
+		api.GET("/history", middleware.AuthRequired(), uploadHandler.GetHistory)
 
 		// 下载音频文件
 		api.GET("/audio/:filename", middleware.AuthRequired(), func(c *gin.Context) {

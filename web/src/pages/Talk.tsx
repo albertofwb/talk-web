@@ -3,11 +3,21 @@ import { useNavigate } from 'react-router-dom'
 import api from '../utils/api'
 import { getUser, logout, isAdmin } from '../utils/auth'
 
+interface HistoryMessage {
+  id: number
+  text: string
+  reply: string
+  status: string
+  sent_at: string
+  replied_at?: string
+}
+
 export default function Talk() {
   const [isRecording, setIsRecording] = useState(false)
   const [message, setMessage] = useState('')
   const [messageType, setMessageType] = useState<'success' | 'error' | ''>('')
   const [micPermission, setMicPermission] = useState<'prompt' | 'granted' | 'denied'>('prompt')
+  const [history, setHistory] = useState<HistoryMessage[]>([])
   const mediaRecorderRef = useRef<MediaRecorder | null>(null)
   const streamRef = useRef<MediaStream | null>(null)
   const chunksRef = useRef<Blob[]>([])
@@ -16,6 +26,21 @@ export default function Talk() {
   const user = getUser()
 
   const MIN_RECORDING_TIME = 500 // 最小录音时长（毫秒）
+
+  // 加载历史记录
+  const loadHistory = async () => {
+    try {
+      const response = await api.get('/history')
+      setHistory(response.data.messages || [])
+    } catch (err) {
+      console.error('加载历史失败:', err)
+    }
+  }
+
+  // 组件挂载时加载历史
+  useEffect(() => {
+    loadHistory()
+  }, [])
 
   // 组件卸载时清理麦克风流
   useEffect(() => {
@@ -49,7 +74,15 @@ export default function Talk() {
     }
   }
 
-  const startRecording = async () => {
+  const startRecording = async (e: React.MouseEvent | React.TouchEvent) => {
+    // 只阻止文本选择，不阻止其他默认行为
+    if (e.type === 'mousedown') {
+      e.preventDefault()
+    }
+
+    // 防止重复启动
+    if (isRecording) return
+
     try {
       // 获取或初始化麦克风流
       const stream = await initMicrophone()
@@ -102,10 +135,16 @@ export default function Talk() {
       setMessageType('')
     } catch (err: any) {
       // 错误已在 initMicrophone 中处理
+      setIsRecording(false)
     }
   }
 
-  const stopRecording = () => {
+  const stopRecording = (e?: React.MouseEvent | React.TouchEvent) => {
+    // 只在鼠标事件时阻止默认行为
+    if (e && e.type === 'mouseup') {
+      e.preventDefault()
+    }
+
     if (mediaRecorderRef.current && isRecording) {
       const recorder = mediaRecorderRef.current
 
@@ -131,30 +170,65 @@ export default function Talk() {
         headers: { 'Content-Type': 'multipart/form-data' },
       })
 
-      const { text, reply, reply_audio, tts_error } = response.data
+      const { text, status } = response.data
 
       // 显示识别的文字
       if (text) {
-        showMessage(`✓ ${text}`, 'success')
+        showMessage(`✓ ${text} (等待回复...)`, 'success')
+
+        // 开始轮询等待回复
+        pollForReply()
       } else {
         showMessage('未识别到语音内容', 'error')
         return
-      }
-
-      // 播放回复语音
-      if (reply_audio) {
-        const audio = new Audio(reply_audio)
-        audio.play().catch(err => {
-          console.error('播放音频失败:', err)
-        })
-      } else if (tts_error) {
-        console.warn('TTS生成失败:', tts_error)
       }
     } catch (err: any) {
       const errorMsg = err.response?.data?.detail || err.response?.data?.error || err.message || '上传失败'
       showMessage(`❌ ${errorMsg}`, 'error')
       console.error('上传错误:', err.response?.data)
     }
+  }
+
+  const pollForReply = async () => {
+    const maxAttempts = 60 // 最多轮询 60 次（60秒）
+    let attempts = 0
+
+    const poll = async () => {
+      if (attempts >= maxAttempts) {
+        showMessage('⏱️ 等待回复超时', 'error')
+        return
+      }
+
+      attempts++
+
+      try {
+        const response = await api.get('/reply')
+        const { status, reply } = response.data
+
+        if (status === 'ready' && reply) {
+          // 收到回复
+          showMessage(`💬 ${reply}`, 'success')
+
+          // 刷新历史记录
+          loadHistory()
+
+          // 使用 TTS 播放（调用本地 tts-play 或生成音频）
+          // 这里简化处理，实际可以调用后端生成 TTS
+          console.log('收到回复:', reply)
+          return
+        }
+
+        // 还在等待，继续轮询
+        if (status === 'waiting') {
+          setTimeout(poll, 1000) // 1秒后再次轮询
+        }
+      } catch (err: any) {
+        console.error('轮询错误:', err)
+        showMessage('获取回复失败', 'error')
+      }
+    }
+
+    poll()
   }
 
   const showMessage = (text: string, type: 'success' | 'error') => {
@@ -209,11 +283,12 @@ export default function Talk() {
               onTouchStart={startRecording}
               onTouchEnd={stopRecording}
               onTouchCancel={stopRecording}
-              className={`w-48 h-48 rounded-full text-white font-bold text-xl shadow-2xl transition-all duration-200 ${
+              className={`w-48 h-48 rounded-full text-white font-bold text-xl shadow-2xl transition-all duration-200 select-none ${
                 isRecording
                   ? 'bg-red-500 scale-110'
                   : 'bg-indigo-600 hover:bg-indigo-700 active:scale-95'
               }`}
+              style={{ userSelect: 'none', WebkitUserSelect: 'none' }}
             >
               {isRecording ? '🎤 录音中...' : '按住说话'}
             </button>
@@ -239,6 +314,35 @@ export default function Talk() {
             </div>
           )}
         </div>
+
+        {/* 对话历史 */}
+        {history.length > 0 && (
+          <div className="mt-8 bg-white rounded-2xl shadow-lg p-6">
+            <h3 className="font-bold text-gray-800 mb-4">最近对话</h3>
+            <div className="space-y-4">
+              {history.map((msg) => (
+                <div key={msg.id} className="border-l-4 border-indigo-500 pl-4 py-2">
+                  <div className="flex items-start gap-2">
+                    <span className="text-gray-500 text-sm">你:</span>
+                    <p className="text-gray-800">{msg.text}</p>
+                  </div>
+                  {msg.reply && (
+                    <div className="flex items-start gap-2 mt-2">
+                      <span className="text-indigo-600 text-sm">AI:</span>
+                      <p className="text-gray-700">{msg.reply}</p>
+                    </div>
+                  )}
+                  {msg.status === 'sent' && !msg.reply && (
+                    <p className="text-gray-400 text-sm mt-2">⏳ 等待回复...</p>
+                  )}
+                  {msg.status === 'timeout' && (
+                    <p className="text-red-400 text-sm mt-2">⏱️ 回复超时</p>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* 使用说明 */}
         <div className="mt-8 bg-white rounded-2xl shadow-lg p-6">

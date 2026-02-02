@@ -1,0 +1,115 @@
+version: '3.8'
+
+# Caddy + talk-web 完整部署配置
+
+services:
+  # PostgreSQL 数据库
+  postgres:
+    image: postgres:15-alpine
+    container_name: talk-web-postgres
+    environment:
+      POSTGRES_USER: talk
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-talk}
+      POSTGRES_DB: talk
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - talk-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U talk"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis 缓存
+  redis:
+    image: redis:7-alpine
+    container_name: talk-web-redis
+    networks:
+      - talk-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  # Go 后端
+  backend:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: talk-web-backend
+    environment:
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_USER=talk
+      - DB_PASSWORD=${DB_PASSWORD:-talk}
+      - DB_NAME=talk
+      - REDIS_ADDR=redis:6379
+      - JWT_SECRET=${JWT_SECRET:-change-me-in-production}
+      - TALK_SERVER_URL=${TALK_SERVER_URL:-http://localhost:5000}
+      - PORT=8080
+      - GIN_MODE=release
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - talk-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # React 前端（构建后的静态文件）
+  frontend:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    container_name: talk-web-frontend
+    volumes:
+      - frontend_dist:/app/dist
+    networks:
+      - talk-network
+
+  # Caddy 反向代理
+  caddy:
+    image: caddy:2-alpine
+    container_name: talk-web-caddy
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"  # HTTP/3
+    volumes:
+      - ./Caddyfile.prod:/etc/caddy/Caddyfile
+      - frontend_dist:/var/www/talk-web
+      - caddy_data:/data
+      - caddy_config:/config
+      - caddy_logs:/var/log/caddy
+    depends_on:
+      - backend
+      - frontend
+    networks:
+      - talk-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:80/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+networks:
+  talk-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  frontend_dist:
+  caddy_data:
+  caddy_config:
+  caddy_logs:

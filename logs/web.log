@@ -1,0 +1,40 @@
+
+> talk-web@0.0.1 dev
+> vite
+
+
+  VITE v5.4.21  ready in 107 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: http://192.168.1.101:5173/
+  ➜  Network: http://100.118.236.127:5173/
+  ➜  Network: http://172.25.0.1:5173/
+  ➜  Network: http://172.21.0.1:5173/
+  ➜  Network: http://172.24.0.1:5173/
+  ➜  Network: http://172.20.0.1:5173/
+  ➜  Network: http://172.26.0.1:5173/
+11:29:26 AM [vite] hmr update /src/pages/Talk.tsx, /src/index.css
+11:38:07 AM [vite] hmr update /src/pages/Talk.tsx, /src/index.css
+11:43:44 AM [vite] hmr update /src/pages/Talk.tsx, /src/index.css
+11:43:55 AM [vite] hmr update /src/pages/Talk.tsx, /src/index.css
+11:45:24 AM [vite] hmr update /src/pages/Talk.tsx, /src/index.css
+11:45:34 AM [vite] hmr update /src/pages/Talk.tsx, /src/index.css
+11:45:41 AM [vite] hmr update /src/pages/Talk.tsx, /src/index.css
+11:45:51 AM [vite] hmr update /src/pages/Talk.tsx, /src/index.css
+11:46:00 AM [vite] hmr update /src/pages/Talk.tsx, /src/index.css
+12:00:12 PM [vite] hmr update /src/pages/Talk.tsx, /src/index.css
+12:00:19 PM [vite] hmr update /src/pages/Talk.tsx, /src/index.css
+12:00:36 PM [vite] hmr update /src/pages/Talk.tsx, /src/index.css
+12:00:41 PM [vite] hmr update /src/pages/Talk.tsx, /src/index.css
+12:00:46 PM [vite] hmr update /src/pages/Talk.tsx, /src/index.css
+12:11:56 PM [vite] hmr update /src/pages/Talk.tsx, /src/index.css
+12:11:59 PM [vite] hmr update /src/pages/Talk.tsx, /src/index.css
+12:12:05 PM [vite] hmr update /src/pages/Talk.tsx, /src/index.css
+12:13:02 PM [vite] hmr update /src/pages/Talk.tsx, /src/index.css
+12:13:06 PM [vite] hmr update /src/pages/Talk.tsx, /src/index.css
+12:29:02 PM [vite] hmr update /src/pages/Login.tsx, /src/index.css
+12:48:56 PM [vite] hmr update /src/pages/Talk.tsx, /src/index.css
+1:25:15 PM [vite] hmr update /src/pages/Talk.tsx, /src/index.css
+1:25:18 PM [vite] hmr update /src/pages/Talk.tsx, /src/index.css
+1:25:23 PM [vite] hmr update /src/pages/Talk.tsx, /src/index.css
+1:25:52 PM [vite] hmr update /src/pages/Talk.tsx, /src/index.css

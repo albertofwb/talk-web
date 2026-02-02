@@ -81,10 +81,6 @@ export default function Login() {
             {loading ? '登录中...' : '登录'}
           </button>
         </form>
-
-        <p className="text-center text-gray-500 text-sm mt-6">
-          默认管理员: admin / admin123
-        </p>
       </div>
     </div>
   )

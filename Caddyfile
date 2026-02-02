@@ -1,0 +1,78 @@
+# Caddy 配置文件 - talk-web
+
+# 开发环境配置（使用 localhost）
+:80 {
+    # 前端 - React 应用
+    handle /* {
+        reverse_proxy localhost:5173
+    }
+
+    # 后端 API
+    handle /api/* {
+        reverse_proxy localhost:8080
+    }
+
+    # 健康检查
+    handle /health {
+        reverse_proxy localhost:8080
+    }
+
+    # 日志
+    log {
+        output file /var/log/caddy/access.log
+        format json
+    }
+}
+
+# 生产环境配置（使用域名和自动 HTTPS）
+# 取消下面的注释并替换为你的域名
+# talk.yourdomain.com {
+#     # 自动 HTTPS
+#     tls {
+#         protocols tls1.2 tls1.3
+#     }
+#
+#     # 前端 - 构建后的静态文件
+#     root * /var/www/talk-web
+#     encode gzip
+#     file_server
+#
+#     # 后端 API
+#     handle /api/* {
+#         reverse_proxy localhost:8080 {
+#             header_up X-Real-IP {remote_host}
+#             header_up X-Forwarded-For {remote_host}
+#             header_up X-Forwarded-Proto {scheme}
+#         }
+#     }
+#
+#     # 健康检查
+#     handle /health {
+#         reverse_proxy localhost:8080
+#     }
+#
+#     # SPA 路由支持 - 所有未匹配的路由返回 index.html
+#     try_files {path} /index.html
+#
+#     # 安全头
+#     header {
+#         # 启用 HSTS
+#         Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+#         # 防止点击劫持
+#         X-Frame-Options "DENY"
+#         # 防止 MIME 类型嗅探
+#         X-Content-Type-Options "nosniff"
+#         # XSS 保护
+#         X-XSS-Protection "1; mode=block"
+#         # Referrer 策略
+#         Referrer-Policy "strict-origin-when-cross-origin"
+#         # 删除服务器信息
+#         -Server
+#     }
+#
+#     # 日志
+#     log {
+#         output file /var/log/caddy/access.log
+#         format json
+#     }
+# }
