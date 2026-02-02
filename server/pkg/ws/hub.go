@@ -133,7 +133,7 @@ func (h *Hub) StartRedisListener(redisAddr string) {
 	})
 
 	ctx := context.Background()
-	inboxKey := "inbox:AlbertVoiceBot"
+	inboxKey := "inbox:AlbertClaudeBot"
 
 	fmt.Printf("[WebSocket Hub] 开始监听 Redis: %s\n", inboxKey)
 

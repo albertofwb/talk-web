@@ -52,6 +52,9 @@ func main() {
 	hub := ws.NewHub()
 	go hub.Run()
 
+	// 启动 Redis 监听器 (自动把 inbox:AlbertVoiceBot 的消息推送给 WebSocket 客户端)
+	go hub.StartRedisListener("localhost:6379")
+
 	// 创建路由
 	r := gin.Default()
 

@@ -165,59 +165,48 @@ func (h *UploadHandler) Upload(c *gin.Context) {
 	}()
 }
 
-// GetReply 轮询获取回复（非阻塞）
+// GetReply 获取最近发送消息的回复
+// 逻辑：找到最新发送的消息，检查它是否已有回复
 func (h *UploadHandler) GetReply(c *gin.Context) {
-	username := c.GetString("username")
+	userID := c.GetUint("user_id")
 
-	// 检查是否有新消息（不弹出）
-	msg, err := h.tg.GetFromTelegram(telegram.DefaultUser)
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{
-			"error": "获取消息失败",
-			"detail": err.Error(),
-		})
-		return
-	}
-
-	// 没有消息
-	if msg == nil {
-		c.JSON(http.StatusOK, gin.H{
-			"status": "waiting",
-			"username": username,
-		})
-		return
-	}
-
-	// 有消息，弹出它
-	msg, err = h.tg.PopFromTelegram(telegram.DefaultUser)
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{
-			"error": "读取消息失败",
-		})
-		return
-	}
-
-	replyText := msg.Text
-
-	// 查找最近一条已回复的消息，获取音频 URL
+	// 获取用户最新发送的一条消息（不管状态）
 	var latestMessage model.Message
-	err = h.db.Where("user_id = ? AND status = 'replied' AND reply = ?",
-		c.GetUint("user_id"), replyText).
-		Order("replied_at desc").
+	err := h.db.Where("user_id = ?", userID).
+		Order("sent_at desc").
 		First(&latestMessage).Error
 
-	replyAudio := ""
-	if err == nil && latestMessage.ReplyAudio != "" {
-		replyAudio = latestMessage.ReplyAudio
+	if err != nil {
+		c.JSON(http.StatusOK, gin.H{
+			"status": "no_message",
+		})
+		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{
-		"status":      "ready",
-		"reply":       replyText,
-		"reply_audio": replyAudio,
-		"sender":      msg.Sender,
-		"timestamp":   msg.Timestamp,
-	})
+	// 检查这条消息的状态
+	switch latestMessage.Status {
+	case "replied":
+		c.JSON(http.StatusOK, gin.H{
+			"status":      "ready",
+			"message_id":  latestMessage.ID,
+			"text":        latestMessage.Text,
+			"reply":       latestMessage.Reply,
+			"reply_audio": latestMessage.ReplyAudio,
+			"replied_at":  latestMessage.RepliedAt,
+		})
+	case "timeout":
+		c.JSON(http.StatusOK, gin.H{
+			"status":     "timeout",
+			"message_id": latestMessage.ID,
+			"text":       latestMessage.Text,
+		})
+	default: // "sent" 或其他
+		c.JSON(http.StatusOK, gin.H{
+			"status":     "waiting",
+			"message_id": latestMessage.ID,
+			"text":       latestMessage.Text,
+		})
+	}
 }
 
 // GetHistory 获取用户的对话历史（最近N条）

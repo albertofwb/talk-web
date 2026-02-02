@@ -718,3 +718,447 @@ Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-
 队列功能正常，消息到达！💕
 [TTS Success] Audio generated: xiaoxiao-1770012166.opus
 2026/02/02 14:02:49 WebSocket error: websocket: close 1000 (normal)
+[GIN] 2026/02/02 - 14:03:57 | 200 |    2.080798ms | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+[GIN] 2026/02/02 - 14:03:57 | 200 |     432.749µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+[GIN] 2026/02/02 - 14:03:58 | 200 |    1.621986ms | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+[GIN] 2026/02/02 - 14:03:58 | 200 |     405.783µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+[GIN] 2026/02/02 - 14:03:59 | 200 |     540.731µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+[GIN] 2026/02/02 - 14:03:59 | 200 |     575.361µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+2026/02/02 14:04:04 WebSocket connected: user=1 (admin)
+[GIN] 2026/02/02 - 14:04:04 | 200 |     197.225µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5ODU1MSwiaWF0IjoxNzcwMDEyMTUxfQ._-5gUaQNEgqCfwGrw7k-EotpMhi7hDTjI7-3JtcfjZo"
+2026/02/02 14:04:04 WebSocket connected: user=1 (admin)
+[GIN] 2026/02/02 - 14:04:04 | 200 |     415.005µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5ODU1MSwiaWF0IjoxNzcwMDEyMTUxfQ._-5gUaQNEgqCfwGrw7k-EotpMhi7hDTjI7-3JtcfjZo"
+2026/02/02 14:04:10 WebSocket connected: user=1 (admin)
+[GIN] 2026/02/02 - 14:04:10 | 200 |     118.101µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5ODU1MSwiaWF0IjoxNzcwMDEyMTUxfQ._-5gUaQNEgqCfwGrw7k-EotpMhi7hDTjI7-3JtcfjZo"
+[STT Success] File: /tmp/talk-upload-1-1770012256.webm, Text: 我終於看到WebSolkit 連接成功了
+[Telegram] Message sent: from-web 我終於看到WebSolkit 連接成功了
+[Telegram] Waiting for reply (async)...
+[GIN] 2026/02/02 - 14:04:18 | 200 |  2.001704908s | fd7a:115c:a1e0::1a35:8821 | POST     "/api/upload"
+[Telegram Reply] ✅ **收到！from-web 前缀测试成功！**
+
+消息内容：`from-web 测试前缀功能`
+
+talk-web → Telegram → 我 ✓
+
+前缀路由功能 OK！💕
+[TTS Success] Audio generated: xiaoxiao-1770012258.opus
+[GIN] 2026/02/02 - 14:04:21 | 200 |    1.151753ms | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+[GIN] 2026/02/02 - 14:04:21 | 401 |      24.448µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/audio/xiaoxiao-1770012258.opus"
+2026/02/02 14:08:31 WebSocket connected: user=1 (admin)
+[GIN] 2026/02/02 - 14:08:31 | 200 |     110.469µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5ODU1MSwiaWF0IjoxNzcwMDEyMTUxfQ._-5gUaQNEgqCfwGrw7k-EotpMhi7hDTjI7-3JtcfjZo"
+2026/02/02 14:09:19 WebSocket connected: user=1 (admin)
+[GIN] 2026/02/02 - 14:09:19 | 200 |     560.561µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5ODU1MSwiaWF0IjoxNzcwMDEyMTUxfQ._-5gUaQNEgqCfwGrw7k-EotpMhi7hDTjI7-3JtcfjZo"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/auth/login           --> talk-web/server/handler.(*AuthHandler).Login-fm (4 handlers)
+[GIN-debug] POST   /api/auth/logout          --> talk-web/server/handler.(*AuthHandler).Logout-fm (4 handlers)
+[GIN-debug] GET    /api/auth/me              --> talk-web/server/handler.(*AuthHandler).Me-fm (5 handlers)
+[GIN-debug] POST   /api/upload               --> talk-web/server/handler.(*UploadHandler).Upload-fm (5 handlers)
+[GIN-debug] GET    /api/ws                   --> talk-web/server/handler.(*WebSocketHandler).ServeWS-fm (4 handlers)
+[GIN-debug] GET    /api/reply                --> talk-web/server/handler.(*UploadHandler).GetReply-fm (5 handlers)
+[GIN-debug] GET    /api/history              --> talk-web/server/handler.(*UploadHandler).GetHistory-fm (5 handlers)
+[GIN-debug] GET    /api/audio/:filename      --> main.main.func1 (5 handlers)
+[GIN-debug] GET    /api/admin/users          --> talk-web/server/handler.(*AdminHandler).ListUsers-fm (6 handlers)
+[GIN-debug] POST   /api/admin/users          --> talk-web/server/handler.(*AdminHandler).CreateUser-fm (6 handlers)
+[GIN-debug] PUT    /api/admin/users/:id      --> talk-web/server/handler.(*AdminHandler).UpdateUser-fm (6 handlers)
+[GIN-debug] DELETE /api/admin/users/:id      --> talk-web/server/handler.(*AdminHandler).DeleteUser-fm (6 handlers)
+[GIN-debug] GET    /health                   --> main.main.func2 (4 handlers)
+2026/02/02 14:13:10 服务启动在 :8080
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/auth/login           --> talk-web/server/handler.(*AuthHandler).Login-fm (4 handlers)
+[GIN-debug] POST   /api/auth/logout          --> talk-web/server/handler.(*AuthHandler).Logout-fm (4 handlers)
+[GIN-debug] GET    /api/auth/me              --> talk-web/server/handler.(*AuthHandler).Me-fm (5 handlers)
+[GIN-debug] POST   /api/upload               --> talk-web/server/handler.(*UploadHandler).Upload-fm (5 handlers)
+[GIN-debug] GET    /api/ws                   --> talk-web/server/handler.(*WebSocketHandler).ServeWS-fm (4 handlers)
+[GIN-debug] GET    /api/reply                --> talk-web/server/handler.(*UploadHandler).GetReply-fm (5 handlers)
+[GIN-debug] GET    /api/history              --> talk-web/server/handler.(*UploadHandler).GetHistory-fm (5 handlers)
+[GIN-debug] GET    /api/audio/:filename      --> main.main.func1 (5 handlers)
+[GIN-debug] GET    /api/admin/users          --> talk-web/server/handler.(*AdminHandler).ListUsers-fm (6 handlers)
+[GIN-debug] POST   /api/admin/users          --> talk-web/server/handler.(*AdminHandler).CreateUser-fm (6 handlers)
+[GIN-debug] PUT    /api/admin/users/:id      --> talk-web/server/handler.(*AdminHandler).UpdateUser-fm (6 handlers)
+[GIN-debug] DELETE /api/admin/users/:id      --> talk-web/server/handler.(*AdminHandler).DeleteUser-fm (6 handlers)
+[GIN-debug] GET    /health                   --> main.main.func2 (4 handlers)
+2026/02/02 14:13:14 服务启动在 :8080
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN] 2026/02/02 - 14:13:24 | 200 |      30.442µs |             ::1 | GET      "/health"
+2026/02/02 14:13:34 WebSocket connected: user=1 (admin)
+[GIN] 2026/02/02 - 14:13:34 | 200 |     138.227µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5ODU1MSwiaWF0IjoxNzcwMDEyMTUxfQ._-5gUaQNEgqCfwGrw7k-EotpMhi7hDTjI7-3JtcfjZo"
+[GIN] 2026/02/02 - 14:13:36 | 200 |    5.708764ms | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+[GIN] 2026/02/02 - 14:13:36 | 200 |    1.377918ms | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+2026/02/02 14:13:36 WebSocket connected: user=1 (admin)
+[GIN] 2026/02/02 - 14:13:36 | 200 |     312.403µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5ODU1MSwiaWF0IjoxNzcwMDEyMTUxfQ._-5gUaQNEgqCfwGrw7k-EotpMhi7hDTjI7-3JtcfjZo"
+2026/02/02 14:13:37 WebSocket connected: user=1 (admin)
+[GIN] 2026/02/02 - 14:13:37 | 200 |     476.962µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5ODU1MSwiaWF0IjoxNzcwMDEyMTUxfQ._-5gUaQNEgqCfwGrw7k-EotpMhi7hDTjI7-3JtcfjZo"
+[GIN] 2026/02/02 - 14:13:38 | 200 |    2.673013ms | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+[GIN] 2026/02/02 - 14:13:38 | 200 |    1.313385ms | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+2026/02/02 14:13:38 WebSocket connected: user=1 (admin)
+[GIN] 2026/02/02 - 14:13:38 | 200 |     427.107µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5ODU1MSwiaWF0IjoxNzcwMDEyMTUxfQ._-5gUaQNEgqCfwGrw7k-EotpMhi7hDTjI7-3JtcfjZo"
+2026/02/02 14:13:39 WebSocket connected: user=1 (admin)
+[GIN] 2026/02/02 - 14:13:39 | 200 |     379.931µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5ODU1MSwiaWF0IjoxNzcwMDEyMTUxfQ._-5gUaQNEgqCfwGrw7k-EotpMhi7hDTjI7-3JtcfjZo"
+[GIN] 2026/02/02 - 14:13:55 | 200 |    3.179538ms | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+[GIN] 2026/02/02 - 14:13:55 | 200 |    1.576567ms | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+2026/02/02 14:13:55 WebSocket connected: user=1 (admin)
+[GIN] 2026/02/02 - 14:13:55 | 200 |     429.066µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5ODU1MSwiaWF0IjoxNzcwMDEyMTUxfQ._-5gUaQNEgqCfwGrw7k-EotpMhi7hDTjI7-3JtcfjZo"
+2026/02/02 14:13:56 WebSocket connected: user=1 (admin)
+[GIN] 2026/02/02 - 14:13:56 | 200 |     633.227µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5ODU1MSwiaWF0IjoxNzcwMDEyMTUxfQ._-5gUaQNEgqCfwGrw7k-EotpMhi7hDTjI7-3JtcfjZo"
+[STT Success] File: /tmp/talk-upload-1-1770012840.webm, Text: 那么我们就来好好看一下吧
+[Telegram] Message sent: from-web 那么我们就来好好看一下吧
+[Telegram] Waiting for reply (async)...
+[GIN] 2026/02/02 - 14:14:02 | 200 |  2.226176107s | fd7a:115c:a1e0::1a35:8821 | POST     "/api/upload"
+[Telegram Reply] 看了你的 teacher-manager 前端代码和截图，整体设计已经很不错了！用了渐变色、现代化的圆角和阴影系统。给你几个美化建议：
+
+🎨 视觉升级建议
+
+1. **微交互动画**
+
+现在只有简单的 fadeIn/fadeInUp，可以加点细腻的交互：
+
+```// 卡片悬停/点击效果
+.stat-card, .schedule-item, .alert-item {
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  
+  &:active {
+    transform: scale(0.98);
+    box-shadow: $shadow-sm; // 点击时阴影减弱
+  }
+}
+
+// 按钮波纹效果
+.quick-actions .grid-content {
+  position: relative;
+  overflow: hidden;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+  
+  &:active::after {
+    opacity: 1;
+  }
+}
+```
+2. **数字跳动优化**
+
+你已经用了 `u-count-to`，可以加渐变色让数字更醒目：
+
+```.stat-card {
+  .stat-number {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 900; // 更粗
+    letter-spacing: -2rpx; // 紧凑点
+  }
+}
+```
+3. **图标呼吸效果**
+
+快捷操作的图标可以加点微妙的动画：
+
+```.quick-actions .grid-content u-icon {
+  animation: breathe 2s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); opacity: 0.9; }
+}
+```
+4. **渐变边框**
+
+低余额学生卡片可以用渐变边框突出：
+
+```.alert-item {
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 6rpx;
+    height: 100%;
+    background: linear-gradient(180deg, #FF6B6B 0%, #FFA94D 100%);
+    border-radius: 8rpx 0 0 8rpx;
+  }
+}
+```
+5. **Glassmorphism (毛玻璃)**
+
+欢迎栏可以加点玻璃质感：
+
+```.welcome-header {
+  background: linear-gradient(135deg, rgba(79, 172, 254, 0.95) 0%, rgba(24, 144, 255, 0.95) 100%);
+  backdrop-filter: blur(20rpx);
+  -webkit-backdrop-filter: blur(20rpx);
+  border: 1rpx solid rgba(255, 255, 255, 0.18);
+}
+```
+6. **骨架屏加载**
+
+数据加载时用骨架屏替代空白：
+
+```<template>
+  <view v-if="loading" class="skeleton">
+    <view class="skeleton-card"></view>
+    <view class="skeleton-card"></view>
+  </view>
+  <view v-else class="stats-container">
+    <!-- 原有内容 -->
+  </view>
+</template>
+
+<style>
+.skeleton-card {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+</style>
+```
+7. **深色模式支持**
+
+可以加个主题切换（uni-app 支持）：
+
+```// 在 variables.scss 添加
+@media (prefers-color-scheme: dark) {
+  $bg-color: #1a1a1a;
+  $bg-gray: #2a2a2a;
+  $text-primary: #ffffff;
+  $text-secondary: #cccccc;
+  // ... 其他深色变量
+}
+```
+🚀 快速实现优先级
+
+1. **高优先级**（立竿见影）：  • 微交互动画（点击效果）
+  • 数字渐变色
+  • 骨架屏加载
+
+2. **中优先级**（锦上添花）：  • 图标呼吸动画
+  • 渐变边框
+  • 玻璃质感
+
+3. **低优先级**（长期规划）：  • 深色模式
+  • 复杂动画
+
+想先试哪个？我可以帮你直接改代码！
+[TTS Success] Audio generated: xiaoxiao-1770012842.opus
+[GIN] 2026/02/02 - 14:14:21 | 404 |         633ns | fd7a:115c:a1e0::1a35:8821 | GET      "/api/api/audio/xiaoxiao-1770012842.opus"
+[GIN] 2026/02/02 - 14:14:21 | 200 |     642.116µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/auth/login           --> talk-web/server/handler.(*AuthHandler).Login-fm (4 handlers)
+[GIN-debug] POST   /api/auth/logout          --> talk-web/server/handler.(*AuthHandler).Logout-fm (4 handlers)
+[GIN-debug] GET    /api/auth/me              --> talk-web/server/handler.(*AuthHandler).Me-fm (5 handlers)
+[GIN-debug] POST   /api/upload               --> talk-web/server/handler.(*UploadHandler).Upload-fm (5 handlers)
+[GIN-debug] GET    /api/ws                   --> talk-web/server/handler.(*WebSocketHandler).ServeWS-fm (4 handlers)
+[GIN-debug] GET    /api/reply                --> talk-web/server/handler.(*UploadHandler).GetReply-fm (5 handlers)
+[GIN-debug] GET    /api/history              --> talk-web/server/handler.(*UploadHandler).GetHistory-fm (5 handlers)
+[GIN-debug] GET    /api/audio/:filename      --> main.main.func1 (5 handlers)
+[GIN-debug] GET    /api/admin/users          --> talk-web/server/handler.(*AdminHandler).ListUsers-fm (6 handlers)
+[GIN-debug] POST   /api/admin/users          --> talk-web/server/handler.(*AdminHandler).CreateUser-fm (6 handlers)
+[GIN-debug] PUT    /api/admin/users/:id      --> talk-web/server/handler.(*AdminHandler).UpdateUser-fm (6 handlers)
+[GIN-debug] DELETE /api/admin/users/:id      --> talk-web/server/handler.(*AdminHandler).DeleteUser-fm (6 handlers)
+[GIN-debug] GET    /health                   --> main.main.func2 (4 handlers)
+2026/02/02 14:15:26 服务启动在 :8080
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8080
+2026/02/02 14:15:28 WebSocket connected: user=1 (admin)
+[GIN] 2026/02/02 - 14:15:28 | 200 |     402.703µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5ODU1MSwiaWF0IjoxNzcwMDEyMTUxfQ._-5gUaQNEgqCfwGrw7k-EotpMhi7hDTjI7-3JtcfjZo"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/auth/login           --> talk-web/server/handler.(*AuthHandler).Login-fm (4 handlers)
+[GIN-debug] POST   /api/auth/logout          --> talk-web/server/handler.(*AuthHandler).Logout-fm (4 handlers)
+[GIN-debug] GET    /api/auth/me              --> talk-web/server/handler.(*AuthHandler).Me-fm (5 handlers)
+[GIN-debug] POST   /api/upload               --> talk-web/server/handler.(*UploadHandler).Upload-fm (5 handlers)
+[GIN-debug] GET    /api/ws                   --> talk-web/server/handler.(*WebSocketHandler).ServeWS-fm (4 handlers)
+[GIN-debug] GET    /api/reply                --> talk-web/server/handler.(*UploadHandler).GetReply-fm (5 handlers)
+[GIN-debug] GET    /api/history              --> talk-web/server/handler.(*UploadHandler).GetHistory-fm (5 handlers)
+[GIN-debug] GET    /api/audio/:filename      --> main.main.func1 (5 handlers)
+[GIN-debug] GET    /api/admin/users          --> talk-web/server/handler.(*AdminHandler).ListUsers-fm (6 handlers)
+[GIN-debug] POST   /api/admin/users          --> talk-web/server/handler.(*AdminHandler).CreateUser-fm (6 handlers)
+[GIN-debug] PUT    /api/admin/users/:id      --> talk-web/server/handler.(*AdminHandler).UpdateUser-fm (6 handlers)
+[GIN-debug] DELETE /api/admin/users/:id      --> talk-web/server/handler.(*AdminHandler).DeleteUser-fm (6 handlers)
+[GIN-debug] GET    /health                   --> main.main.func2 (4 handlers)
+2026/02/02 14:21:01 服务启动在 :8080
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/auth/login           --> talk-web/server/handler.(*AuthHandler).Login-fm (4 handlers)
+[GIN-debug] POST   /api/auth/logout          --> talk-web/server/handler.(*AuthHandler).Logout-fm (4 handlers)
+[GIN-debug] GET    /api/auth/me              --> talk-web/server/handler.(*AuthHandler).Me-fm (5 handlers)
+[GIN-debug] POST   /api/upload               --> talk-web/server/handler.(*UploadHandler).Upload-fm (5 handlers)
+[GIN-debug] GET    /api/ws                   --> talk-web/server/handler.(*WebSocketHandler).ServeWS-fm (4 handlers)
+[WebSocket Hub] 开始监听 Redis: inbox:AlbertVoiceBot
+[GIN-debug] GET    /api/reply                --> talk-web/server/handler.(*UploadHandler).GetReply-fm (5 handlers)
+[GIN-debug] GET    /api/history              --> talk-web/server/handler.(*UploadHandler).GetHistory-fm (5 handlers)
+[GIN-debug] GET    /api/audio/:filename      --> main.main.func1 (5 handlers)
+[GIN-debug] GET    /api/admin/users          --> talk-web/server/handler.(*AdminHandler).ListUsers-fm (6 handlers)
+[GIN-debug] POST   /api/admin/users          --> talk-web/server/handler.(*AdminHandler).CreateUser-fm (6 handlers)
+[GIN-debug] PUT    /api/admin/users/:id      --> talk-web/server/handler.(*AdminHandler).UpdateUser-fm (6 handlers)
+[GIN-debug] DELETE /api/admin/users/:id      --> talk-web/server/handler.(*AdminHandler).DeleteUser-fm (6 handlers)
+[GIN-debug] GET    /health                   --> main.main.func2 (4 handlers)
+2026/02/02 14:27:59 服务启动在 :8080
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8080
+[Redis] 收到消息: 测试回复到 AlbertVoiceBot
+[Redis] 收到消息: 测试CLI推送到WebSocket
+2026/02/02 14:32:49 WebSocket connected: user=1 (admin)
+[GIN] 2026/02/02 - 14:32:49 | 200 |     172.921µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5ODU1MSwiaWF0IjoxNzcwMDEyMTUxfQ._-5gUaQNEgqCfwGrw7k-EotpMhi7hDTjI7-3JtcfjZo"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[WebSocket Hub] 开始监听 Redis: inbox:AlbertVoiceBot
+[GIN-debug] POST   /api/auth/login           --> talk-web/server/handler.(*AuthHandler).Login-fm (4 handlers)
+[GIN-debug] POST   /api/auth/logout          --> talk-web/server/handler.(*AuthHandler).Logout-fm (4 handlers)
+[GIN-debug] GET    /api/auth/me              --> talk-web/server/handler.(*AuthHandler).Me-fm (5 handlers)
+[GIN-debug] POST   /api/upload               --> talk-web/server/handler.(*UploadHandler).Upload-fm (5 handlers)
+[GIN-debug] GET    /api/ws                   --> talk-web/server/handler.(*WebSocketHandler).ServeWS-fm (4 handlers)
+[GIN-debug] GET    /api/reply                --> talk-web/server/handler.(*UploadHandler).GetReply-fm (5 handlers)
+[GIN-debug] GET    /api/history              --> talk-web/server/handler.(*UploadHandler).GetHistory-fm (5 handlers)
+[GIN-debug] GET    /api/audio/:filename      --> main.main.func1 (5 handlers)
+[GIN-debug] GET    /api/admin/users          --> talk-web/server/handler.(*AdminHandler).ListUsers-fm (6 handlers)
+[GIN-debug] POST   /api/admin/users          --> talk-web/server/handler.(*AdminHandler).CreateUser-fm (6 handlers)
+[GIN-debug] PUT    /api/admin/users/:id      --> talk-web/server/handler.(*AdminHandler).UpdateUser-fm (6 handlers)
+[GIN-debug] DELETE /api/admin/users/:id      --> talk-web/server/handler.(*AdminHandler).DeleteUser-fm (6 handlers)
+[GIN-debug] GET    /health                   --> main.main.func2 (4 handlers)
+2026/02/02 14:32:51 服务启动在 :8080
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8080
+2026/02/02 14:32:52 WebSocket connected: user=1 (admin)
+[GIN] 2026/02/02 - 14:32:52 | 200 |     159.412µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5ODU1MSwiaWF0IjoxNzcwMDEyMTUxfQ._-5gUaQNEgqCfwGrw7k-EotpMhi7hDTjI7-3JtcfjZo"
+[STT Success] File: /tmp/talk-upload-1-1770013980.webm, Text: 让我们再来一次测试
+[Telegram] Message sent: from-web 让我们再来一次测试
+[Telegram] Waiting for reply (async)...
+[GIN] 2026/02/02 - 14:33:02 | 200 |  1.902841452s | fd7a:115c:a1e0::1a35:8821 | POST     "/api/upload"
+2026/02/02 14:33:22 WebSocket connected: user=1 (admin)
+[GIN] 2026/02/02 - 14:33:22 | 200 |     374.138µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5ODU1MSwiaWF0IjoxNzcwMDEyMTUxfQ._-5gUaQNEgqCfwGrw7k-EotpMhi7hDTjI7-3JtcfjZo"
+2026/02/02 14:34:01 WebSocket connected: user=1 (admin)
+[GIN] 2026/02/02 - 14:34:01 | 200 |     399.653µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5ODU1MSwiaWF0IjoxNzcwMDEyMTUxfQ._-5gUaQNEgqCfwGrw7k-EotpMhi7hDTjI7-3JtcfjZo"
+[Telegram Error] No reply: timeout waiting for reply
+2026/02/02 14:34:07 WebSocket connected: user=1 (admin)
+[GIN] 2026/02/02 - 14:34:07 | 200 |     212.131µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5ODU1MSwiaWF0IjoxNzcwMDEyMTUxfQ._-5gUaQNEgqCfwGrw7k-EotpMhi7hDTjI7-3JtcfjZo"
+[STT Success] File: /tmp/talk-upload-1-1770014062.webm, Text: 這是第一次
+[Telegram] Message sent: from-web 這是第一次
+[Telegram] Waiting for reply (async)...
+[GIN] 2026/02/02 - 14:34:24 | 200 |  1.810989372s | fd7a:115c:a1e0::1a35:8821 | POST     "/api/upload"
+[Telegram Error] No reply: timeout waiting for reply
+2026/02/02 14:36:16 WebSocket connected: user=1 (admin)
+[GIN] 2026/02/02 - 14:36:16 | 200 |     381.026µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5ODU1MSwiaWF0IjoxNzcwMDEyMTUxfQ._-5gUaQNEgqCfwGrw7k-EotpMhi7hDTjI7-3JtcfjZo"
+[STT Success] File: /tmp/talk-upload-1-1770014175.webm, Text: 此时此时,这是第二次。
+[Telegram] Message sent: from-web 此时此时,这是第二次。
+[Telegram] Waiting for reply (async)...
+[GIN] 2026/02/02 - 14:36:17 | 200 |  2.261467967s | fd7a:115c:a1e0::1a35:8821 | POST     "/api/upload"
+[GIN] 2026/02/02 - 14:36:17 | 200 |    2.272816ms | fd7a:115c:a1e0::1a35:8821 | GET      "/api/reply"
+[GIN] 2026/02/02 - 14:36:18 | 200 |    1.671939ms | fd7a:115c:a1e0::1a35:8821 | GET      "/api/reply"
+[GIN] 2026/02/02 - 14:36:19 | 200 |    1.846599ms | fd7a:115c:a1e0::1a35:8821 | GET      "/api/reply"
+[GIN] 2026/02/02 - 14:36:20 | 200 |    1.846336ms | fd7a:115c:a1e0::1a35:8821 | GET      "/api/reply"
+[GIN] 2026/02/02 - 14:36:22 | 200 |    1.772231ms | fd7a:115c:a1e0::1a35:8821 | GET      "/api/reply"
+[GIN] 2026/02/02 - 14:36:22 | 200 |     746.169µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+2026/02/02 14:36:22 WebSocket connected: user=1 (admin)
+[GIN] 2026/02/02 - 14:36:22 | 200 |     131.221µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5ODU1MSwiaWF0IjoxNzcwMDEyMTUxfQ._-5gUaQNEgqCfwGrw7k-EotpMhi7hDTjI7-3JtcfjZo"
+[GIN] 2026/02/02 - 14:36:22 | 200 |     600.578µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+2026/02/02 14:36:23 WebSocket connected: user=1 (admin)
+[GIN] 2026/02/02 - 14:36:23 | 200 |     123.375µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5ODU1MSwiaWF0IjoxNzcwMDEyMTUxfQ._-5gUaQNEgqCfwGrw7k-EotpMhi7hDTjI7-3JtcfjZo"
+[Telegram Error] No reply: timeout waiting for reply
+2026/02/02 14:39:35 WebSocket connected: user=1 (admin)
+[GIN] 2026/02/02 - 14:39:35 | 200 |     404.792µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5ODU1MSwiaWF0IjoxNzcwMDEyMTUxfQ._-5gUaQNEgqCfwGrw7k-EotpMhi7hDTjI7-3JtcfjZo"
+[GIN] 2026/02/02 - 14:39:38 | 200 |    3.025554ms | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+[GIN] 2026/02/02 - 14:39:38 | 200 |    1.435884ms | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+2026/02/02 14:39:38 WebSocket connected: user=1 (admin)
+[GIN] 2026/02/02 - 14:39:38 | 200 |     390.327µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5ODU1MSwiaWF0IjoxNzcwMDEyMTUxfQ._-5gUaQNEgqCfwGrw7k-EotpMhi7hDTjI7-3JtcfjZo"
+2026/02/02 14:39:39 WebSocket connected: user=1 (admin)
+[GIN] 2026/02/02 - 14:39:39 | 200 |     328.268µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5ODU1MSwiaWF0IjoxNzcwMDEyMTUxfQ._-5gUaQNEgqCfwGrw7k-EotpMhi7hDTjI7-3JtcfjZo"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/auth/login           --> talk-web/server/handler.(*AuthHandler).Login-fm (4 handlers)
+[GIN-debug] POST   /api/auth/logout          --> talk-web/server/handler.(*AuthHandler).Logout-fm (4 handlers)
+[GIN-debug] GET    /api/auth/me              --> talk-web/server/handler.(*AuthHandler).Me-fm (5 handlers)
+[GIN-debug] POST   /api/upload               --> talk-web/server/handler.(*UploadHandler).Upload-fm (5 handlers)
+[GIN-debug] GET    /api/ws                   --> talk-web/server/handler.(*WebSocketHandler).ServeWS-fm (4 handlers)
+[GIN-debug] GET    /api/reply                --> talk-web/server/handler.(*UploadHandler).GetReply-fm (5 handlers)
+[GIN-debug] GET    /api/history              --> talk-web/server/handler.(*UploadHandler).GetHistory-fm (5 handlers)
+[GIN-debug] GET    /api/audio/:filename      --> main.main.func1 (5 handlers)
+[GIN-debug] GET    /api/admin/users          --> talk-web/server/handler.(*AdminHandler).ListUsers-fm (6 handlers)
+[WebSocket Hub] 开始监听 Redis: inbox:AlbertVoiceBot
+[GIN-debug] POST   /api/admin/users          --> talk-web/server/handler.(*AdminHandler).CreateUser-fm (6 handlers)
+[GIN-debug] PUT    /api/admin/users/:id      --> talk-web/server/handler.(*AdminHandler).UpdateUser-fm (6 handlers)
+[GIN-debug] DELETE /api/admin/users/:id      --> talk-web/server/handler.(*AdminHandler).DeleteUser-fm (6 handlers)
+[GIN-debug] GET    /health                   --> main.main.func2 (4 handlers)
+2026/02/02 14:41:33 服务启动在 :8080
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN] 2026/02/02 - 14:42:19 | 200 |    2.831626ms | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+[GIN] 2026/02/02 - 14:42:19 | 200 |     615.983µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+2026/02/02 14:42:20 WebSocket connected: user=1 (admin)
+[GIN] 2026/02/02 - 14:42:20 | 200 |     426.709µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5ODU1MSwiaWF0IjoxNzcwMDEyMTUxfQ._-5gUaQNEgqCfwGrw7k-EotpMhi7hDTjI7-3JtcfjZo"
+2026/02/02 14:42:20 WebSocket connected: user=1 (admin)
+[GIN] 2026/02/02 - 14:42:20 | 200 |     130.855µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5ODU1MSwiaWF0IjoxNzcwMDEyMTUxfQ._-5gUaQNEgqCfwGrw7k-EotpMhi7hDTjI7-3JtcfjZo"
+[STT Success] File: /tmp/talk-upload-1-1770014543.webm, Text: 翻了一次刷刷
+[Telegram] Message sent: from-web 翻了一次刷刷
+[Telegram] Waiting for reply (async)...
+[GIN] 2026/02/02 - 14:42:25 | 200 |  2.215018083s | fd7a:115c:a1e0::1a35:8821 | POST     "/api/upload"
+[GIN] 2026/02/02 - 14:42:33 | 200 |    1.473782ms | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+[GIN] 2026/02/02 - 14:42:33 | 200 |      249.84µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+2026/02/02 14:42:33 WebSocket connected: user=1 (admin)
+[GIN] 2026/02/02 - 14:42:33 | 200 |      93.306µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5ODU1MSwiaWF0IjoxNzcwMDEyMTUxfQ._-5gUaQNEgqCfwGrw7k-EotpMhi7hDTjI7-3JtcfjZo"
+2026/02/02 14:42:34 WebSocket connected: user=1 (admin)
+[GIN] 2026/02/02 - 14:42:34 | 200 |     162.834µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5ODU1MSwiaWF0IjoxNzcwMDEyMTUxfQ._-5gUaQNEgqCfwGrw7k-EotpMhi7hDTjI7-3JtcfjZo"
+[GIN] 2026/02/02 - 14:42:40 | 200 |    3.123573ms | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+[GIN] 2026/02/02 - 14:42:40 | 200 |    1.670388ms | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+2026/02/02 14:42:40 WebSocket connected: user=1 (admin)
+[GIN] 2026/02/02 - 14:42:40 | 200 |     234.816µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5ODU1MSwiaWF0IjoxNzcwMDEyMTUxfQ._-5gUaQNEgqCfwGrw7k-EotpMhi7hDTjI7-3JtcfjZo"
+2026/02/02 14:42:41 WebSocket connected: user=1 (admin)
+[GIN] 2026/02/02 - 14:42:41 | 200 |     241.535µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5ODU1MSwiaWF0IjoxNzcwMDEyMTUxfQ._-5gUaQNEgqCfwGrw7k-EotpMhi7hDTjI7-3JtcfjZo"
+[Telegram Error] No reply: timeout waiting for reply
