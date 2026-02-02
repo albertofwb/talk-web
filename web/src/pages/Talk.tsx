@@ -351,30 +351,41 @@ export default function Talk() {
   // 播放音频（带认证）
   const playAudio = async (audioUrl: string) => {
     try {
-      console.log('播放音频:', audioUrl)
+      console.log('🔊 [播放音频] 开始:', audioUrl)
 
       // 使用 api 实例下载音频（自动携带 token）
+      console.log('📥 [播放音频] 下载中...')
       const response = await api.get(audioUrl, {
         responseType: 'blob'
       })
+      console.log('✓ [播放音频] 下载完成，大小:', response.data.size, 'bytes')
 
       // 创建 Blob URL
       const blob = new Blob([response.data], { type: 'audio/opus' })
       const blobUrl = URL.createObjectURL(blob)
+      console.log('✓ [播放音频] Blob URL 创建:', blobUrl)
 
       // 播放
       const audio = new Audio(blobUrl)
       audio.onended = () => {
+        console.log('✓ [播放音频] 播放完成')
         URL.revokeObjectURL(blobUrl) // 清理 Blob URL
       }
       audio.onerror = (err) => {
-        console.error('音频播放失败:', err)
+        console.error('✗ [播放音频] 播放失败:', err)
         URL.revokeObjectURL(blobUrl)
       }
+
+      console.log('▶️ [播放音频] 开始播放...')
       await audio.play()
-      console.log('✓ 音频播放成功')
-    } catch (err) {
-      console.error('下载或播放音频失败:', err)
+      console.log('✓ [播放音频] 播放成功')
+    } catch (err: any) {
+      console.error('✗ [播放音频] 失败:', err)
+      console.error('错误详情:', {
+        name: err.name,
+        message: err.message,
+        code: err.code
+      })
     }
   }
 
