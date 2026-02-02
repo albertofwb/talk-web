@@ -22,6 +22,10 @@ func InitJWT(secret string) {
 	jwtSecret = []byte(secret)
 }
 
+func GetJWTSecret() []byte {
+	return jwtSecret
+}
+
 func GenerateToken(userID uint, username string, isAdmin bool) (string, error) {
 	claims := Claims{
 		UserID:   userID,

@@ -18,10 +18,12 @@ export default function Talk() {
   const [messageType, setMessageType] = useState<'success' | 'error' | ''>('')
   const [micPermission, setMicPermission] = useState<'prompt' | 'granted' | 'denied'>('prompt')
   const [history, setHistory] = useState<HistoryMessage[]>([])
+  const [wsConnected, setWsConnected] = useState(false)
   const mediaRecorderRef = useRef<MediaRecorder | null>(null)
   const streamRef = useRef<MediaStream | null>(null)
   const chunksRef = useRef<Blob[]>([])
   const recordingStartTimeRef = useRef<number>(0)
+  const wsRef = useRef<WebSocket | null>(null)
   const navigate = useNavigate()
   const user = getUser()
 
@@ -37,9 +39,76 @@ export default function Talk() {
     }
   }
 
-  // 组件挂载时加载历史
+  // 建立 WebSocket 连接
+  const connectWebSocket = () => {
+    const token = localStorage.getItem('token')
+    if (!token) return
+
+    // 开发环境：连接到后端服务器 (localhost:8080)
+    // 生产环境：使用当前页面的 host
+    const isDev = import.meta.env.DEV
+    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:'
+    const host = isDev ? 'localhost:8080' : window.location.host
+    const wsUrl = `${protocol}//${host}/api/ws?token=${token}`
+
+    console.log('连接 WebSocket:', wsUrl)
+    const ws = new WebSocket(wsUrl)
+
+    ws.onopen = () => {
+      console.log('WebSocket 已连接')
+      setWsConnected(true)
+    }
+
+    ws.onmessage = (event) => {
+      try {
+        const data = JSON.parse(event.data)
+        console.log('收到 WebSocket 消息:', data)
+
+        if (data.type === 'reply') {
+          const { reply, reply_audio } = data.data
+
+          // 显示回复
+          showMessage(`💬 ${reply}`, 'success')
+
+          // 刷新历史
+          loadHistory()
+
+          // 播放音频
+          if (reply_audio) {
+            const audio = new Audio(reply_audio)
+            audio.play().catch(err => console.error('播放失败:', err))
+            console.log('播放音频:', reply_audio)
+          }
+        }
+      } catch (err) {
+        console.error('解析消息失败:', err)
+      }
+    }
+
+    ws.onerror = (error) => {
+      console.error('WebSocket 错误:', error)
+      setWsConnected(false)
+    }
+
+    ws.onclose = () => {
+      console.log('WebSocket 已断开，3秒后重连...')
+      setWsConnected(false)
+      setTimeout(connectWebSocket, 3000)
+    }
+
+    wsRef.current = ws
+  }
+
+  // 组件挂载时加载历史并建立 WebSocket
   useEffect(() => {
     loadHistory()
+    connectWebSocket()
+
+    return () => {
+      if (wsRef.current) {
+        wsRef.current.close()
+      }
+    }
   }, [])
 
   // 组件卸载时清理麦克风流
@@ -174,10 +243,14 @@ export default function Talk() {
 
       // 显示识别的文字
       if (text) {
-        showMessage(`✓ ${text} (等待回复...)`, 'success')
-
-        // 开始轮询等待回复
-        pollForReply()
+        if (wsConnected) {
+          showMessage(`✓ ${text} (等待回复...)`, 'success')
+          // WebSocket 会自动推送回复，无需轮询
+        } else {
+          showMessage(`✓ ${text} (等待回复...)`, 'success')
+          // WebSocket 未连接，使用轮询兜底
+          pollForReply()
+        }
       } else {
         showMessage('未识别到语音内容', 'error')
         return
@@ -203,7 +276,7 @@ export default function Talk() {
 
       try {
         const response = await api.get('/reply')
-        const { status, reply } = response.data
+        const { status, reply, reply_audio } = response.data
 
         if (status === 'ready' && reply) {
           // 收到回复
@@ -212,9 +285,16 @@ export default function Talk() {
           // 刷新历史记录
           loadHistory()
 
-          // 使用 TTS 播放（调用本地 tts-play 或生成音频）
-          // 这里简化处理，实际可以调用后端生成 TTS
-          console.log('收到回复:', reply)
+          // 播放 TTS 音频
+          if (reply_audio) {
+            const audio = new Audio(reply_audio)
+            audio.play().catch(err => {
+              console.error('播放音频失败:', err)
+            })
+            console.log('播放音频:', reply_audio)
+          } else {
+            console.log('收到回复但没有音频:', reply)
+          }
           return
         }
 
@@ -247,7 +327,16 @@ export default function Talk() {
         <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
           <div>
             <h1 className="text-xl font-bold text-gray-800">语音对讲</h1>
-            <p className="text-sm text-gray-500">欢迎, {user?.username}</p>
+            <div className="flex items-center gap-3">
+              <p className="text-sm text-gray-500">欢迎, {user?.username}</p>
+              <span className={`text-xs px-2 py-1 rounded-full ${
+                wsConnected
+                  ? 'bg-green-100 text-green-700'
+                  : 'bg-red-100 text-red-700'
+              }`}>
+                {wsConnected ? '🟢 已连接' : '🔴 未连接'}
+              </span>
+            </div>
           </div>
           <div className="flex gap-3">
             {isAdmin() && (

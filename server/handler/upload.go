@@ -10,6 +10,7 @@ import (
 	"talk-web/server/pkg/stt"
 	"talk-web/server/pkg/telegram"
 	"talk-web/server/pkg/tts"
+	"talk-web/server/pkg/ws"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -21,14 +22,16 @@ type UploadHandler struct {
 	tts *tts.TTS
 	tg  *telegram.TelegramClient
 	db  *gorm.DB
+	hub *ws.Hub
 }
 
-func NewUploadHandler(talkServerURL string, db *gorm.DB) *UploadHandler {
+func NewUploadHandler(talkServerURL string, db *gorm.DB, hub *ws.Hub) *UploadHandler {
 	return &UploadHandler{
 		stt: stt.NewSTT(),
 		tts: tts.NewTTS(),
 		tg:  telegram.NewTelegramClient(),
 		db:  db,
+		hub: hub,
 	}
 }
 
@@ -134,23 +137,31 @@ func (h *UploadHandler) Upload(c *gin.Context) {
 		replyText := replyMsg.Text
 		fmt.Printf("[Telegram Reply] %s\n", replyText)
 
+		// TTS: 文字转语音
+		replyAudioPath, err := h.tts.Generate(replyText)
+		audioURL := ""
+		if err != nil {
+			fmt.Printf("[TTS Error] Failed to generate: %v\n", err)
+		} else {
+			audioFilename := filepath.Base(replyAudioPath)
+			audioURL = fmt.Sprintf("/api/audio/%s", audioFilename)
+			fmt.Printf("[TTS Success] Audio generated: %s\n", audioFilename)
+		}
+
 		// 更新数据库记录
 		now := time.Now()
 		h.db.Model(&message).Updates(map[string]interface{}{
-			"reply":      replyText,
-			"status":     "replied",
-			"replied_at": now,
+			"reply":       replyText,
+			"reply_audio": audioURL,
+			"status":      "replied",
+			"replied_at":  now,
 		})
 
-		// TTS: 文字转语音
-		replyAudioPath, err := h.tts.Generate(replyText)
-		if err != nil {
-			fmt.Printf("[TTS Error] Failed to generate: %v\n", err)
-			return
-		}
-
-		audioFilename := filepath.Base(replyAudioPath)
-		fmt.Printf("[TTS Success] Audio generated: %s\n", audioFilename)
+		// 通过 WebSocket 推送回复给用户
+		h.hub.SendToUser(userID, "reply", map[string]interface{}{
+			"reply":       replyText,
+			"reply_audio": audioURL,
+		})
 	}()
 }
 
@@ -188,14 +199,24 @@ func (h *UploadHandler) GetReply(c *gin.Context) {
 
 	replyText := msg.Text
 
-	// 查找对应的 TTS 音频文件
-	// 由于异步生成，可能还没完成，这里简单返回文本
-	// 前端可以自己调用 TTS 或等待音频生成
+	// 查找最近一条已回复的消息，获取音频 URL
+	var latestMessage model.Message
+	err = h.db.Where("user_id = ? AND status = 'replied' AND reply = ?",
+		c.GetUint("user_id"), replyText).
+		Order("replied_at desc").
+		First(&latestMessage).Error
+
+	replyAudio := ""
+	if err == nil && latestMessage.ReplyAudio != "" {
+		replyAudio = latestMessage.ReplyAudio
+	}
+
 	c.JSON(http.StatusOK, gin.H{
-		"status": "ready",
-		"reply":  replyText,
-		"sender": msg.Sender,
-		"timestamp": msg.Timestamp,
+		"status":      "ready",
+		"reply":       replyText,
+		"reply_audio": replyAudio,
+		"sender":      msg.Sender,
+		"timestamp":   msg.Timestamp,
 	})
 }
 
@@ -203,7 +224,7 @@ func (h *UploadHandler) GetReply(c *gin.Context) {
 func (h *UploadHandler) GetHistory(c *gin.Context) {
 	userID := c.GetUint("user_id")
 
-	// 获取最近3条消息
+	// 获取最近3条消息（按创建时间倒序，最新的在前）
 	var messages []model.Message
 	err := h.db.Where("user_id = ?", userID).
 		Order("created_at desc").
@@ -215,12 +236,6 @@ func (h *UploadHandler) GetHistory(c *gin.Context) {
 			"error": "获取历史记录失败",
 		})
 		return
-	}
-
-	// 反转顺序（最早的在前）
-	for i := 0; i < len(messages)/2; i++ {
-		j := len(messages) - 1 - i
-		messages[i], messages[j] = messages[j], messages[i]
 	}
 
 	c.JSON(http.StatusOK, gin.H{

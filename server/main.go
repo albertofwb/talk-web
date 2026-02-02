@@ -7,6 +7,7 @@ import (
 	"talk-web/server/handler"
 	"talk-web/server/middleware"
 	"talk-web/server/model"
+	"talk-web/server/pkg/ws"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -47,6 +48,10 @@ func main() {
 	// 初始化JWT
 	middleware.InitJWT(cfg.JWTSecret)
 
+	// 初始化 WebSocket Hub
+	hub := ws.NewHub()
+	go hub.Run()
+
 	// 创建路由
 	r := gin.Default()
 
@@ -69,7 +74,8 @@ func main() {
 	// 初始化handlers
 	authHandler := handler.NewAuthHandler(db)
 	adminHandler := handler.NewAdminHandler(db)
-	uploadHandler := handler.NewUploadHandler(cfg.TalkServerURL, db)
+	uploadHandler := handler.NewUploadHandler(cfg.TalkServerURL, db, hub)
+	wsHandler := handler.NewWebSocketHandler(hub)
 
 	// 路由
 	api := r.Group("/api")
@@ -85,7 +91,10 @@ func main() {
 		// 上传音频
 		api.POST("/upload", middleware.AuthRequired(), uploadHandler.Upload)
 
-		// 轮询获取回复
+		// WebSocket 连接（实时推送，认证在 handler 内部处理）
+		api.GET("/ws", wsHandler.ServeWS)
+
+		// 轮询获取回复（兼容旧版本）
 		api.GET("/reply", middleware.AuthRequired(), uploadHandler.GetReply)
 
 		// 获取历史记录

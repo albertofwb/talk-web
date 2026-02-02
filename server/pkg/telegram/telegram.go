@@ -13,7 +13,7 @@ const (
 	MessageQueue = "message_queue"
 	InboxPrefix  = "inbox:"
 	DefaultBot   = "AlbertClaudeBot"
-	DefaultUser  = "WbsaysVoiceBot"
+	DefaultUser  = "AlbertClaudeBot" // 从同一个收件箱读取回复
 )
 
 // Config Telegram 配置（继承自 tg/th 命令）
