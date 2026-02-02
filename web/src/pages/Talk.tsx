@@ -24,10 +24,13 @@ export default function Talk() {
   const chunksRef = useRef<Blob[]>([])
   const recordingStartTimeRef = useRef<number>(0)
   const wsRef = useRef<WebSocket | null>(null)
+  const wsReconnectTimerRef = useRef<number | null>(null)
+  const wsReconnectAttemptsRef = useRef<number>(0)
   const navigate = useNavigate()
   const user = getUser()
 
   const MIN_RECORDING_TIME = 500 // 最小录音时长（毫秒）
+  const WS_RECONNECT_DELAYS = [1000, 2000, 5000, 10000, 30000] // 重连延迟（递增）
 
   // 加载历史记录
   const loadHistory = async () => {
@@ -39,10 +42,16 @@ export default function Talk() {
     }
   }
 
-  // 建立 WebSocket 连接
+  // 建立 WebSocket 连接（带重连策略）
   const connectWebSocket = () => {
     const token = localStorage.getItem('token')
     if (!token) return
+
+    // 清除之前的重连定时器
+    if (wsReconnectTimerRef.current) {
+      clearTimeout(wsReconnectTimerRef.current)
+      wsReconnectTimerRef.current = null
+    }
 
     // 开发环境：连接到后端服务器 (localhost:8080)
     // 生产环境：使用当前页面的 host
@@ -51,12 +60,13 @@ export default function Talk() {
     const host = isDev ? 'localhost:8080' : window.location.host
     const wsUrl = `${protocol}//${host}/api/ws?token=${token}`
 
-    console.log('连接 WebSocket:', wsUrl)
+    console.log('连接 WebSocket:', wsUrl, `(尝试 ${wsReconnectAttemptsRef.current + 1})`)
     const ws = new WebSocket(wsUrl)
 
     ws.onopen = () => {
       console.log('WebSocket 已连接')
       setWsConnected(true)
+      wsReconnectAttemptsRef.current = 0 // 重置重连计数
     }
 
     ws.onmessage = (event) => {
@@ -91,9 +101,19 @@ export default function Talk() {
     }
 
     ws.onclose = () => {
-      console.log('WebSocket 已断开，3秒后重连...')
+      console.log('WebSocket 已断开')
       setWsConnected(false)
-      setTimeout(connectWebSocket, 3000)
+
+      // 计算重连延迟（递增退避策略）
+      const delayIndex = Math.min(wsReconnectAttemptsRef.current, WS_RECONNECT_DELAYS.length - 1)
+      const delay = WS_RECONNECT_DELAYS[delayIndex]
+
+      console.log(`${delay / 1000}秒后尝试重连...`)
+      wsReconnectAttemptsRef.current++
+
+      wsReconnectTimerRef.current = window.setTimeout(() => {
+        connectWebSocket()
+      }, delay)
     }
 
     wsRef.current = ws
@@ -105,8 +125,13 @@ export default function Talk() {
     connectWebSocket()
 
     return () => {
+      // 清理 WebSocket 连接
       if (wsRef.current) {
         wsRef.current.close()
+      }
+      // 清理重连定时器
+      if (wsReconnectTimerRef.current) {
+        clearTimeout(wsReconnectTimerRef.current)
       }
     }
   }, [])
