@@ -1,7 +1,13 @@
 package ws
 
 import (
+	"context"
+	"encoding/json"
+	"fmt"
 	"sync"
+	"time"
+
+	"github.com/redis/go-redis/v9"
 )
 
 // Hub 管理所有 WebSocket 连接
@@ -92,4 +98,84 @@ func (h *Hub) SendToUser(userID uint, msgType string, data interface{}) {
 		Data:   data,
 	}
 	h.broadcast <- msg
+}
+
+// BroadcastToAll 广播消息给所有在线用户
+func (h *Hub) BroadcastToAll(msgType string, data interface{}) {
+	h.mu.RLock()
+	defer h.mu.RUnlock()
+
+	for userID, client := range h.clients {
+		msg := &Message{
+			UserID: userID,
+			Type:   msgType,
+			Data:   data,
+		}
+		select {
+		case client.send <- msg:
+		default:
+			// 发送失败，跳过
+		}
+	}
+}
+
+// RedisMessage Redis 收件箱消息格式
+type RedisMessage struct {
+	Text      string `json:"text"`
+	Timestamp string `json:"timestamp"`
+}
+
+// StartRedisListener 启动 Redis 监听器，自动把新消息推送给所有客户端
+func (h *Hub) StartRedisListener(redisAddr string) {
+	rdb := redis.NewClient(&redis.Options{
+		Addr: redisAddr,
+		DB:   0,
+	})
+
+	ctx := context.Background()
+	inboxKey := "inbox:AlbertVoiceBot"
+
+	fmt.Printf("[WebSocket Hub] 开始监听 Redis: %s\n", inboxKey)
+
+	for {
+		// 阻塞式获取消息 (BRPOP)
+		result, err := rdb.BRPop(ctx, 5*time.Second, inboxKey).Result()
+		if err == redis.Nil {
+			// 超时，继续等待
+			continue
+		}
+		if err != nil {
+			fmt.Printf("[Redis Error] %v\n", err)
+			time.Sleep(1 * time.Second)
+			continue
+		}
+
+		// result[0] 是 key, result[1] 是 value
+		msgJSON := result[1]
+
+		var msg RedisMessage
+		if err := json.Unmarshal([]byte(msgJSON), &msg); err != nil {
+			fmt.Printf("[Redis Error] JSON 解析失败: %v\n", err)
+			continue
+		}
+
+		fmt.Printf("[Redis] 收到消息: %s\n", msg.Text)
+
+		// 只处理 to-web 开头的消息
+		const prefix = "to-web "
+		if len(msg.Text) < len(prefix) || msg.Text[:len(prefix)] != prefix {
+			fmt.Printf("[Redis] 忽略非 to-web 消息\n")
+			continue
+		}
+
+		// 去掉 to-web 前缀
+		replyText := msg.Text[len(prefix):]
+		fmt.Printf("[Redis] 推送给前端: %s\n", replyText)
+
+		// 广播给所有在线用户
+		h.BroadcastToAll("reply", map[string]interface{}{
+			"reply":     replyText,
+			"timestamp": msg.Timestamp,
+		})
+	}
 }
