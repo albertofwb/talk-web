@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"strings"
 	"sync"
 	"time"
 
@@ -167,21 +168,43 @@ func (h *Hub) StartRedisListener(redisAddr string) {
 
 			fmt.Printf("[Redis] 收到消息: %s\n", msg.Text)
 
-			// 只处理 to-web 开头的消息
-			const prefix = "to-web "
-			if len(msg.Text) < len(prefix) || msg.Text[:len(prefix)] != prefix {
+			// 解析新格式：to-web:[user_id]:[msg_id] 回复内容
+			if len(msg.Text) < 7 || msg.Text[:7] != "to-web:" {
 				fmt.Printf("[Redis] 忽略非 to-web 消息\n")
 				continue
 			}
 
-			// 去掉 to-web 前缀
-			replyText := msg.Text[len(prefix):]
-			fmt.Printf("[Redis] 推送给前端: %s\n", replyText)
+			// 分割 header 和 content
+			parts := strings.SplitN(msg.Text, " ", 2)
+			if len(parts) < 2 {
+				fmt.Printf("[Redis Error] 格式错误，缺少消息内容\n")
+				continue
+			}
 
-			// 广播给所有在线用户
-			h.BroadcastToAll("reply", map[string]interface{}{
-				"reply":     replyText,
-				"timestamp": msg.Timestamp,
+			header := parts[0]      // "to-web:[user_id]:[msg_id]"
+			replyText := parts[1]   // "回复内容"
+
+			// 解析 header
+			headerParts := strings.Split(header, ":")
+			if len(headerParts) != 3 {
+				fmt.Printf("[Redis Error] Header 格式错误: %s\n", header)
+				continue
+			}
+
+			userIDStr := headerParts[1]
+			msgID := headerParts[2]
+
+			// 解析 user_id
+			var userID uint
+			fmt.Sscanf(userIDStr, "%d", &userID)
+
+			fmt.Printf("[Redis] ✓ 推送给用户 %d, 消息ID: %s\n", userID, msgID)
+
+			// 只推送给指定用户（不再广播）
+			h.SendToUser(userID, "reply", map[string]interface{}{
+				"message_id":  msgID,
+				"reply":       replyText,
+				"timestamp":   msg.Timestamp,
 			})
 		}
 	}

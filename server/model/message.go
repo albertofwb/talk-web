@@ -6,6 +6,7 @@ import (
 
 type Message struct {
 	ID         uint       `json:"id" gorm:"primaryKey"`
+	MessageID  string     `json:"message_id" gorm:"uniqueIndex"` // 唯一消息ID（用于精确匹配回复）
 	UserID     uint       `json:"user_id" gorm:"not null;index"`
 	Username   string     `json:"username" gorm:"not null"`
 	Text       string     `json:"text" gorm:"not null"` // 用户说的话（STT识别结果）

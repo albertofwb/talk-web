@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"strings"
 	"talk-web/server/model"
 	"talk-web/server/pkg/stt"
 	"talk-web/server/pkg/telegram"
@@ -39,6 +40,13 @@ func (h *UploadHandler) Upload(c *gin.Context) {
 	// 获取用户信息
 	userID := c.GetUint("user_id")
 	username := c.GetString("username")
+
+	// 获取消息ID（前端生成的唯一标识）
+	msgID := c.PostForm("msg_id")
+	if msgID == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "缺少 msg_id 参数"})
+		return
+	}
 
 	// 接收音频文件
 	file, header, err := c.Request.FormFile("audio")
@@ -84,18 +92,22 @@ func (h *UploadHandler) Upload(c *gin.Context) {
 
 	// 保存到数据库
 	message := model.Message{
-		UserID:   userID,
-		Username: username,
-		Text:     recognizedText,
-		Status:   "sent",
-		SentAt:   time.Now(),
+		MessageID: msgID,  // 添加消息ID
+		UserID:    userID,
+		Username:  username,
+		Text:      recognizedText,
+		Status:    "sent",
+		SentAt:    time.Now(),
 	}
 	if err := h.db.Create(&message).Error; err != nil {
 		fmt.Printf("[DB Error] Failed to save message: %v\n", err)
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "保存消息失败"})
+		return
 	}
 
-	// 添加 from-web 前缀标识来源
-	telegramText := fmt.Sprintf("from-web %s", recognizedText)
+	// 新格式：from-web:[user_id]:[msg_id] 消息内容
+	telegramText := fmt.Sprintf("from-web:%d:%s %s", userID, msgID, recognizedText)
+	fmt.Printf("[Format] Telegram message: %s\n", telegramText)
 
 	// 发送到 Telegram
 	err = h.tg.SendToTelegram(telegramText, telegram.DefaultBot)
@@ -112,11 +124,12 @@ func (h *UploadHandler) Upload(c *gin.Context) {
 
 	// 立即返回识别结果，不等待回复
 	c.JSON(http.StatusOK, gin.H{
-		"text":     recognizedText,
-		"status":   "sent",
-		"message":  "消息已发送，等待回复中...",
-		"user_id":  userID,
-		"username": username,
+		"text":       recognizedText,
+		"message_id": msgID,  // 返回消息ID
+		"status":     "sent",
+		"message":    "消息已发送，等待回复中...",
+		"user_id":    userID,
+		"username":   username,
 	})
 
 	// 异步等待回复并生成 TTS
@@ -137,18 +150,51 @@ func (h *UploadHandler) Upload(c *gin.Context) {
 		replyText := replyMsg.Text
 		fmt.Printf("[Telegram Reply] %s\n", replyText)
 
-		// 只处理 to-web 开头的回复
-		const prefix = "to-web "
-		shouldPushToWeb := len(replyText) >= len(prefix) && replyText[:len(prefix)] == prefix
-
-		// 去掉前缀用于显示和 TTS
-		displayText := replyText
-		if shouldPushToWeb {
-			displayText = replyText[len(prefix):]
-			fmt.Printf("[Telegram] 检测到 to-web 消息，将推送到前端\n")
-		} else {
-			fmt.Printf("[Telegram] 非 to-web 消息，仅更新数据库\n")
+		// 解析新格式：to-web:[user_id]:[msg_id] 回复内容
+		// 检查是否为 to-web 消息
+		if len(replyText) < 7 || replyText[:7] != "to-web:" {
+			fmt.Printf("[Telegram] 非 to-web 消息，忽略\n")
+			h.db.Model(&message).Update("status", "ignored")
+			return
 		}
+
+		// 分割 header 和 content
+		parts := strings.SplitN(replyText, " ", 2)
+		if len(parts) < 2 {
+			fmt.Printf("[Telegram Error] 格式错误，缺少消息内容\n")
+			return
+		}
+
+		header := parts[0]      // "to-web:[user_id]:[msg_id]"
+		displayText := parts[1] // "回复内容"
+
+		// 解析 header
+		headerParts := strings.Split(header, ":")
+		if len(headerParts) != 3 {
+			fmt.Printf("[Telegram Error] Header 格式错误: %s\n", header)
+			return
+		}
+
+		replyUserIDStr := headerParts[1]
+		replyMsgID := headerParts[2]
+
+		// 验证 user_id 匹配
+		var replyUserID uint
+		fmt.Sscanf(replyUserIDStr, "%d", &replyUserID)
+		if replyUserID != userID {
+			fmt.Printf("[Telegram Warning] UserID 不匹配: 期望 %d, 实际 %d\n", userID, replyUserID)
+			// 不推送给当前用户
+			return
+		}
+
+		// 验证 msg_id 匹配
+		if replyMsgID != msgID {
+			fmt.Printf("[Telegram Warning] MessageID 不匹配: 期望 %s, 实际 %s\n", msgID, replyMsgID)
+			// 不推送给当前用户
+			return
+		}
+
+		fmt.Printf("[Telegram] ✓ 验证通过 - UserID: %d, MessageID: %s\n", userID, msgID)
 
 		// TTS: 文字转语音（使用去掉前缀的文本）
 		replyAudioPath, err := h.tts.Generate(displayText)
@@ -170,13 +216,13 @@ func (h *UploadHandler) Upload(c *gin.Context) {
 			"replied_at":  now,
 		})
 
-		// 只有 to-web 消息才推送到前端
-		if shouldPushToWeb {
-			h.hub.SendToUser(userID, "reply", map[string]interface{}{
-				"reply":       displayText,
-				"reply_audio": audioURL,
-			})
-		}
+		// 推送到前端（已验证 user_id 和 msg_id 匹配）
+		h.hub.SendToUser(userID, "reply", map[string]interface{}{
+			"message_id":  msgID,
+			"reply":       displayText,
+			"reply_audio": audioURL,
+		})
+		fmt.Printf("[WebSocket] 推送回复给用户 %d, 消息ID: %s\n", userID, msgID)
 	}()
 }
 

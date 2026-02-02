@@ -16,7 +16,7 @@ export default function Talk() {
   const [isRecording, setIsRecording] = useState(false)
   const [message, setMessage] = useState('')
   const [messageType, setMessageType] = useState<'success' | 'error' | ''>('')
-  const [micPermission, setMicPermission] = useState<'prompt' | 'granted' | 'denied'>('prompt')
+  const [_micPermission, setMicPermission] = useState<'prompt' | 'granted' | 'denied'>('prompt')
   const [history, setHistory] = useState<HistoryMessage[]>([])
   const [wsConnected, setWsConnected] = useState(false)
   const mediaRecorderRef = useRef<MediaRecorder | null>(null)
@@ -31,6 +31,7 @@ export default function Talk() {
 
   const MIN_RECORDING_TIME = 500 // 最小录音时长（毫秒）
   const WS_RECONNECT_DELAYS = [1000, 2000, 5000, 10000, 30000] // 重连延迟（递增）
+  const isMouseDownRef = useRef(false) // 跟踪鼠标是否按下
 
   // 加载历史记录
   const loadHistory = async (playLatestAudio = false) => {
@@ -153,6 +154,21 @@ export default function Talk() {
     }
   }, [])
 
+  // 全局 mouseup 监听（防止鼠标事件被打断）
+  useEffect(() => {
+    const handleGlobalMouseUp = () => {
+      if (isMouseDownRef.current && isRecording) {
+        console.log('全局 mouseup 触发，停止录音')
+        stopRecording()
+      }
+    }
+
+    document.addEventListener('mouseup', handleGlobalMouseUp)
+    return () => {
+      document.removeEventListener('mouseup', handleGlobalMouseUp)
+    }
+  }, [isRecording])
+
   // 初始化麦克风（只请求一次权限）
   const initMicrophone = async () => {
     if (streamRef.current) {
@@ -179,6 +195,7 @@ export default function Talk() {
     // 只阻止文本选择，不阻止其他默认行为
     if (e.type === 'mousedown') {
       e.preventDefault()
+      isMouseDownRef.current = true
     }
 
     // 防止重复启动
@@ -244,6 +261,12 @@ export default function Talk() {
     // 只在鼠标事件时阻止默认行为
     if (e && e.type === 'mouseup') {
       e.preventDefault()
+      isMouseDownRef.current = false
+    }
+
+    // 鼠标移出时也重置状态
+    if (e && e.type === 'mouseleave') {
+      isMouseDownRef.current = false
     }
 
     if (mediaRecorderRef.current && isRecording) {
@@ -261,8 +284,13 @@ export default function Talk() {
   }
 
   const uploadAudio = async (audioBlob: Blob) => {
+    // 生成唯一消息ID (timestamp + random)
+    const msgId = `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
+    console.log('📤 [上传] 生成消息ID:', msgId)
+
     const formData = new FormData()
     formData.append('audio', audioBlob, 'recording.webm')
+    formData.append('msg_id', msgId)  // 添加消息ID
 
     try {
       showMessage('识别中...', 'success')
@@ -271,7 +299,8 @@ export default function Talk() {
         headers: { 'Content-Type': 'multipart/form-data' },
       })
 
-      const { text, status } = response.data
+      const { text, message_id } = response.data
+      console.log('✓ [上传] 后端返回 message_id:', message_id)
 
       // 显示识别的文字
       if (text) {
@@ -353,15 +382,23 @@ export default function Talk() {
     try {
       console.log('🔊 [播放音频] 开始:', audioUrl)
 
-      // 使用 api 实例下载音频（自动携带 token）
+      // 使用 fetch 下载音频（audioUrl 已包含 /api 前缀）
+      const token = localStorage.getItem('token')
+
       console.log('📥 [播放音频] 下载中...')
-      const response = await api.get(audioUrl, {
-        responseType: 'blob'
+      const response = await fetch(audioUrl, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
       })
-      console.log('✓ [播放音频] 下载完成，大小:', response.data.size, 'bytes')
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`)
+      }
+
+      const blob = await response.blob()
+      console.log('✓ [播放音频] 下载完成，大小:', blob.size, 'bytes')
 
       // 创建 Blob URL
-      const blob = new Blob([response.data], { type: 'audio/opus' })
       const blobUrl = URL.createObjectURL(blob)
       console.log('✓ [播放音频] Blob URL 创建:', blobUrl)
 
@@ -438,6 +475,7 @@ export default function Talk() {
             <button
               onMouseDown={startRecording}
               onMouseUp={stopRecording}
+              onMouseLeave={stopRecording}
               onTouchStart={startRecording}
               onTouchEnd={stopRecording}
               onTouchCancel={stopRecording}
@@ -478,7 +516,7 @@ export default function Talk() {
           <div className="mt-8 bg-white rounded-2xl shadow-lg p-6">
             <h3 className="font-bold text-gray-800 mb-4">最近对话</h3>
             <div className="space-y-4">
-              {history.map((msg) => (
+              {history.slice().reverse().map((msg) => (
                 <div key={msg.id} className="border-l-4 border-indigo-500 pl-4 py-2">
                   <div className="flex items-start gap-2">
                     <span className="text-gray-500 text-sm">你:</span>
