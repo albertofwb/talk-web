@@ -467,14 +467,21 @@ export default function Talk() {
                       <p className="text-gray-700">{msg.reply}</p>
                     </div>
                   )}
-                  {msg.status === 'sent' && !msg.reply && (
+                  {!msg.reply && msg.status !== 'timeout' && (
                     <p className="text-gray-400 text-sm mt-2">⏳ 等待回复...</p>
                   )}
                   {msg.status === 'timeout' && !msg.reply && (
                     <p className="text-red-400 text-sm mt-2">⏱️ 回复超时</p>
                   )}
-                  {msg.status === 'replied' && msg.reply && (
-                    <p className="text-green-600 text-xs mt-1">✓ {new Date(msg.replied_at || '').toLocaleString()}</p>
+                  {msg.reply && msg.replied_at && (
+                    <p className="text-green-600 text-xs mt-1">
+                      ✓ {new Date(msg.replied_at).toLocaleString('zh-CN', {
+                        month: '2-digit',
+                        day: '2-digit',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                      })}
+                    </p>
                   )}
                 </div>
               ))}
