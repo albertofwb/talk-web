@@ -137,45 +137,52 @@ func (h *Hub) StartRedisListener(redisAddr string) {
 
 	fmt.Printf("[WebSocket Hub] 开始监听 Redis: %s\n", inboxKey)
 
+	lastProcessedIndex := int64(-1) // 记录最后处理的消息索引
+
 	for {
-		// 阻塞式获取消息 (BRPOP)
-		result, err := rdb.BRPop(ctx, 5*time.Second, inboxKey).Result()
-		if err == redis.Nil {
-			// 超时，继续等待
-			continue
-		}
+		// 非阻塞式获取消息列表 (LRANGE)，不删除消息
+		result, err := rdb.LRange(ctx, inboxKey, 0, -1).Result()
 		if err != nil {
 			fmt.Printf("[Redis Error] %v\n", err)
 			time.Sleep(1 * time.Second)
 			continue
 		}
 
-		// result[0] 是 key, result[1] 是 value
-		msgJSON := result[1]
-
-		var msg RedisMessage
-		if err := json.Unmarshal([]byte(msgJSON), &msg); err != nil {
-			fmt.Printf("[Redis Error] JSON 解析失败: %v\n", err)
+		// 如果没有新消息，等待一会儿
+		if len(result) == 0 || int64(len(result))-1 <= lastProcessedIndex {
+			time.Sleep(1 * time.Second)
 			continue
 		}
 
-		fmt.Printf("[Redis] 收到消息: %s\n", msg.Text)
+		// 处理新消息（从最后处理的索引+1开始）
+		for i := lastProcessedIndex + 1; i < int64(len(result)); i++ {
+			msgJSON := result[i]
+			lastProcessedIndex = i
 
-		// 只处理 to-web 开头的消息
-		const prefix = "to-web "
-		if len(msg.Text) < len(prefix) || msg.Text[:len(prefix)] != prefix {
-			fmt.Printf("[Redis] 忽略非 to-web 消息\n")
-			continue
+			var msg RedisMessage
+			if err := json.Unmarshal([]byte(msgJSON), &msg); err != nil {
+				fmt.Printf("[Redis Error] JSON 解析失败: %v\n", err)
+				continue
+			}
+
+			fmt.Printf("[Redis] 收到消息: %s\n", msg.Text)
+
+			// 只处理 to-web 开头的消息
+			const prefix = "to-web "
+			if len(msg.Text) < len(prefix) || msg.Text[:len(prefix)] != prefix {
+				fmt.Printf("[Redis] 忽略非 to-web 消息\n")
+				continue
+			}
+
+			// 去掉 to-web 前缀
+			replyText := msg.Text[len(prefix):]
+			fmt.Printf("[Redis] 推送给前端: %s\n", replyText)
+
+			// 广播给所有在线用户
+			h.BroadcastToAll("reply", map[string]interface{}{
+				"reply":     replyText,
+				"timestamp": msg.Timestamp,
+			})
 		}
-
-		// 去掉 to-web 前缀
-		replyText := msg.Text[len(prefix):]
-		fmt.Printf("[Redis] 推送给前端: %s\n", replyText)
-
-		// 广播给所有在线用户
-		h.BroadcastToAll("reply", map[string]interface{}{
-			"reply":     replyText,
-			"timestamp": msg.Timestamp,
-		})
 	}
 }
