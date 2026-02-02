@@ -52,7 +52,14 @@ func main() {
 
 	// CORS
 	r.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{"http://localhost:5173", "http://localhost:3000"},
+		AllowOrigins: []string{
+			"http://localhost:5173",
+			"http://localhost:3000",
+			"https://100.118.236.127",
+			"https://talk.home.wbsays.com",
+			"http://talk.home.wbsays.com",
+			"https://home.tail96df5.ts.net",
+		},
 		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
 		AllowHeaders:     []string{"Origin", "Content-Type", "Authorization"},
 		ExposeHeaders:    []string{"Content-Length"},
@@ -77,6 +84,13 @@ func main() {
 
 		// 上传音频
 		api.POST("/upload", middleware.AuthRequired(), uploadHandler.Upload)
+
+		// 下载音频文件
+		api.GET("/audio/:filename", middleware.AuthRequired(), func(c *gin.Context) {
+			filename := c.Param("filename")
+			filePath := fmt.Sprintf("/tmp/%s", filename)
+			c.File(filePath)
+		})
 
 		// 管理后台
 		admin := api.Group("/admin")

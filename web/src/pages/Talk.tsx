@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import api from '../utils/api'
 import { getUser, logout, isAdmin } from '../utils/auth'
@@ -7,15 +7,60 @@ export default function Talk() {
   const [isRecording, setIsRecording] = useState(false)
   const [message, setMessage] = useState('')
   const [messageType, setMessageType] = useState<'success' | 'error' | ''>('')
+  const [micPermission, setMicPermission] = useState<'prompt' | 'granted' | 'denied'>('prompt')
   const mediaRecorderRef = useRef<MediaRecorder | null>(null)
+  const streamRef = useRef<MediaStream | null>(null)
   const chunksRef = useRef<Blob[]>([])
+  const recordingStartTimeRef = useRef<number>(0)
   const navigate = useNavigate()
   const user = getUser()
 
-  const startRecording = async () => {
+  const MIN_RECORDING_TIME = 500 // 最小录音时长（毫秒）
+
+  // 组件卸载时清理麦克风流
+  useEffect(() => {
+    return () => {
+      if (streamRef.current) {
+        streamRef.current.getTracks().forEach(track => track.stop())
+        streamRef.current = null
+      }
+    }
+  }, [])
+
+  // 初始化麦克风（只请求一次权限）
+  const initMicrophone = async () => {
+    if (streamRef.current) {
+      return streamRef.current
+    }
+
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
-      const mediaRecorder = new MediaRecorder(stream)
+      streamRef.current = stream
+      setMicPermission('granted')
+      return stream
+    } catch (err: any) {
+      setMicPermission('denied')
+      if (err.name === 'NotAllowedError') {
+        showMessage('麦克风权限被拒绝，请在浏览器设置中允许', 'error')
+      } else {
+        showMessage(`麦克风错误: ${err.message}`, 'error')
+      }
+      throw err
+    }
+  }
+
+  const startRecording = async () => {
+    try {
+      // 获取或初始化麦克风流
+      const stream = await initMicrophone()
+
+      // 尝试使用 opus 编码的 webm，如果不支持则使用默认
+      let options = { mimeType: 'audio/webm;codecs=opus' }
+      if (!MediaRecorder.isTypeSupported(options.mimeType)) {
+        options = { mimeType: 'audio/webm' }
+      }
+
+      const mediaRecorder = new MediaRecorder(stream, options)
       mediaRecorderRef.current = mediaRecorder
       chunksRef.current = []
 
@@ -26,23 +71,51 @@ export default function Talk() {
       }
 
       mediaRecorder.onstop = async () => {
-        const audioBlob = new Blob(chunksRef.current, { type: 'audio/webm' })
+        const recordingDuration = Date.now() - recordingStartTimeRef.current
+
+        // 检查录音时长
+        if (recordingDuration < MIN_RECORDING_TIME) {
+          showMessage('录音时间太短，请按住至少1秒', 'error')
+          return
+        }
+
+        // 等待一下确保数据收集完成
+        await new Promise(resolve => setTimeout(resolve, 100))
+
+        const audioBlob = new Blob(chunksRef.current, { type: 'audio/webm;codecs=opus' })
+
+        // 检查音频大小
+        if (audioBlob.size < 1000) {
+          showMessage('录音数据太小，请重试并说话', 'error')
+          return
+        }
+
+        console.log(`录音完成: ${recordingDuration}ms, 大小: ${audioBlob.size} bytes`)
         await uploadAudio(audioBlob)
-        stream.getTracks().forEach((track) => track.stop())
       }
 
-      mediaRecorder.start()
+      // 每 100ms 收集一次数据
+      mediaRecorder.start(100)
+      recordingStartTimeRef.current = Date.now()
       setIsRecording(true)
       setMessage('')
       setMessageType('')
-    } catch (err) {
-      showMessage('无法访问麦克风', 'error')
+    } catch (err: any) {
+      // 错误已在 initMicrophone 中处理
     }
   }
 
   const stopRecording = () => {
     if (mediaRecorderRef.current && isRecording) {
-      mediaRecorderRef.current.stop()
+      const recorder = mediaRecorderRef.current
+
+      // 检查录音器状态
+      if (recorder.state === 'recording') {
+        recorder.stop()
+      } else {
+        console.warn('MediaRecorder 状态异常:', recorder.state)
+      }
+
       setIsRecording(false)
     }
   }
@@ -52,12 +125,35 @@ export default function Talk() {
     formData.append('audio', audioBlob, 'recording.webm')
 
     try {
+      showMessage('识别中...', 'success')
+
       const response = await api.post('/upload', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       })
-      showMessage(response.data.text || '上传成功', 'success')
+
+      const { text, reply, reply_audio, tts_error } = response.data
+
+      // 显示识别的文字
+      if (text) {
+        showMessage(`✓ ${text}`, 'success')
+      } else {
+        showMessage('未识别到语音内容', 'error')
+        return
+      }
+
+      // 播放回复语音
+      if (reply_audio) {
+        const audio = new Audio(reply_audio)
+        audio.play().catch(err => {
+          console.error('播放音频失败:', err)
+        })
+      } else if (tts_error) {
+        console.warn('TTS生成失败:', tts_error)
+      }
     } catch (err: any) {
-      showMessage(err.response?.data?.error || '上传失败', 'error')
+      const errorMsg = err.response?.data?.detail || err.response?.data?.error || err.message || '上传失败'
+      showMessage(`❌ ${errorMsg}`, 'error')
+      console.error('上传错误:', err.response?.data)
     }
   }
 
@@ -110,9 +206,9 @@ export default function Talk() {
             <button
               onMouseDown={startRecording}
               onMouseUp={stopRecording}
-              onMouseLeave={stopRecording}
               onTouchStart={startRecording}
               onTouchEnd={stopRecording}
+              onTouchCancel={stopRecording}
               className={`w-48 h-48 rounded-full text-white font-bold text-xl shadow-2xl transition-all duration-200 ${
                 isRecording
                   ? 'bg-red-500 scale-110'
@@ -125,8 +221,9 @@ export default function Talk() {
 
           {/* 提示信息 */}
           <div className="text-center text-gray-600 space-y-2">
-            <p>🖱️ 鼠标按住录音，松开发送</p>
-            <p>📱 触摸屏按住录音，松开发送</p>
+            <p>🖱️ 鼠标按住录音（至少1秒），松开发送</p>
+            <p>📱 触摸屏按住录音（至少1秒），松开发送</p>
+            <p className="text-sm text-gray-500">⚠️ 请确保说话清晰，环境安静</p>
           </div>
 
           {/* 消息提示 */}
@@ -147,10 +244,12 @@ export default function Talk() {
         <div className="mt-8 bg-white rounded-2xl shadow-lg p-6">
           <h3 className="font-bold text-gray-800 mb-4">使用说明</h3>
           <ul className="space-y-2 text-gray-600">
-            <li>• 按住录音按钮开始录音</li>
-            <li>• 松开按钮自动上传并发送到语音识别服务</li>
+            <li>• <strong>按住录音按钮至少1秒</strong>开始录音</li>
+            <li>• 松开按钮自动上传并识别语音内容</li>
             <li>• 录音时会显示红色状态</li>
-            <li>• 确保浏览器已授权麦克风权限</li>
+            <li>• 识别成功后会自动播放回复语音</li>
+            <li>• 确保浏览器已授权麦克风权限（HTTPS）</li>
+            <li>• 环境安静，说话清晰效果更好</li>
           </ul>
         </div>
       </div>

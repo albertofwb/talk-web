@@ -1,22 +1,27 @@
 package handler
 
 import (
-	"bytes"
 	"fmt"
 	"io"
-	"mime/multipart"
 	"net/http"
+	"os"
+	"path/filepath"
+	"talk-web/server/pkg/stt"
+	"talk-web/server/pkg/tts"
+	"time"
 
 	"github.com/gin-gonic/gin"
 )
 
 type UploadHandler struct {
-	talkServerURL string
+	stt *stt.STT
+	tts *tts.TTS
 }
 
 func NewUploadHandler(talkServerURL string) *UploadHandler {
 	return &UploadHandler{
-		talkServerURL: talkServerURL,
+		stt: stt.NewSTT(),
+		tts: tts.NewTTS(),
 	}
 }
 
@@ -33,56 +38,66 @@ func (h *UploadHandler) Upload(c *gin.Context) {
 	}
 	defer file.Close()
 
-	// 读取文件内容
-	fileBytes, err := io.ReadAll(file)
+	// 保存临时文件
+	tmpFile := filepath.Join("/tmp", fmt.Sprintf("talk-upload-%d-%d%s",
+		userID, time.Now().Unix(), filepath.Ext(header.Filename)))
+
+	out, err := os.Create(tmpFile)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "读取文件失败"})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "创建临时文件失败"})
 		return
 	}
+	defer os.Remove(tmpFile) // 清理临时文件
 
-	// 转发到 talk-server
-	var buf bytes.Buffer
-	writer := multipart.NewWriter(&buf)
+	if _, err := io.Copy(out, file); err != nil {
+		out.Close()
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "保存文件失败"})
+		return
+	}
+	out.Close()
 
-	// 添加音频文件
-	part, err := writer.CreateFormFile("audio", header.Filename)
+	// STT: 语音转文字
+	recognizedText, err := h.stt.Transcribe(tmpFile)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "创建表单失败"})
-		return
-	}
-	if _, err := part.Write(fileBytes); err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "写入文件失败"})
+		// 记录详细错误
+		fmt.Printf("[STT Error] File: %s, Error: %v\n", tmpFile, err)
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error": "语音识别失败",
+			"detail": err.Error(),
+			"file": tmpFile,
+		})
 		return
 	}
 
-	// 添加用户信息
-	writer.WriteField("user_id", fmt.Sprintf("%d", userID))
-	writer.WriteField("username", username)
-	writer.Close()
+	// 记录成功的识别
+	fmt.Printf("[STT Success] File: %s, Text: %s\n", tmpFile, recognizedText)
 
-	// 发送到 talk-server
-	req, err := http.NewRequest("POST", h.talkServerURL+"/stt", &buf)
+	// 生成回复文本
+	replyText := fmt.Sprintf("收到 %s 的消息：%s", username, recognizedText)
+
+	// TTS: 文字转语音
+	replyAudioPath, err := h.tts.Generate(replyText)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "创建请求失败"})
-		return
-	}
-	req.Header.Set("Content-Type", writer.FormDataContentType())
-
-	client := &http.Client{}
-	resp, err := client.Do(req)
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "转发到talk-server失败"})
-		return
-	}
-	defer resp.Body.Close()
-
-	// 读取 talk-server 的响应
-	body, err := io.ReadAll(resp.Body)
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "读取响应失败"})
+		// TTS 失败不影响返回识别结果
+		c.JSON(http.StatusOK, gin.H{
+			"text":     recognizedText,
+			"reply":    replyText,
+			"user_id":  userID,
+			"username": username,
+			"tts_error": err.Error(),
+		})
 		return
 	}
 
-	// 返回结果
-	c.Data(resp.StatusCode, resp.Header.Get("Content-Type"), body)
+	// 返回识别结果和回复语音 URL
+	audioFilename := filepath.Base(replyAudioPath)
+	audioURL := fmt.Sprintf("/api/audio/%s", audioFilename)
+
+	c.JSON(http.StatusOK, gin.H{
+		"text":       recognizedText,
+		"reply":      replyText,
+		"reply_audio": audioURL,
+		"user_id":    userID,
+		"username":   username,
+	})
 }
