@@ -33,10 +33,20 @@ export default function Talk() {
   const WS_RECONNECT_DELAYS = [1000, 2000, 5000, 10000, 30000] // 重连延迟（递增）
 
   // 加载历史记录
-  const loadHistory = async () => {
+  const loadHistory = async (playLatestAudio = false) => {
     try {
       const response = await api.get('/history')
-      setHistory(response.data.messages || [])
+      const messages = response.data.messages || []
+      setHistory(messages)
+
+      // 如果需要播放最新音频
+      if (playLatestAudio && messages.length > 0) {
+        const latestMsg = messages[0] // 最新的消息（按时间倒序）
+        if (latestMsg.reply_audio) {
+          console.log('自动播放最新音频:', latestMsg.reply_audio)
+          playAudio(latestMsg.reply_audio)
+        }
+      }
     } catch (err) {
       console.error('加载历史失败:', err)
     }
@@ -77,12 +87,14 @@ export default function Talk() {
           // 显示回复
           showMessage(`💬 ${reply}`, 'success')
 
-          // 刷新历史
-          loadHistory()
-
-          // 播放音频（需要带 token 下载）
+          // 刷新历史并播放音频
+          // 如果 WebSocket 消息中有 reply_audio，直接播放
+          // 否则从历史记录中获取最新的音频播放
           if (reply_audio) {
             playAudio(reply_audio)
+            loadHistory() // 刷新历史但不播放
+          } else {
+            loadHistory(true) // 刷新历史并自动播放最新音频
           }
         }
       } catch (err) {
