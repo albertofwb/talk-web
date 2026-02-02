@@ -1,0 +1,49 @@
+.PHONY: help init up down server web logs clean
+
+help:
+	@echo "talk-web 项目管理"
+	@echo ""
+	@echo "可用命令:"
+	@echo "  make init    - 初始化项目（安装依赖）"
+	@echo "  make up      - 启动数据库服务"
+	@echo "  make down    - 停止数据库服务"
+	@echo "  make server  - 启动 Go 后端"
+	@echo "  make web     - 启动 React 前端"
+	@echo "  make logs    - 查看数据库日志"
+	@echo "  make clean   - 清理数据"
+
+init:
+	@echo "📦 安装 Go 依赖..."
+	cd server && go mod download
+	@echo "📦 安装 Node 依赖..."
+	cd web && npm install
+	@echo "✓ 依赖安装完成"
+
+up:
+	@echo "🚀 启动数据库服务..."
+	docker-compose up -d
+	@echo "✓ 数据库已启动"
+	@echo ""
+	@echo "PostgreSQL: localhost:5432"
+	@echo "Redis: localhost:6379"
+
+down:
+	@echo "⏹️  停止数据库服务..."
+	docker-compose down
+	@echo "✓ 数据库已停止"
+
+server:
+	@echo "🚀 启动 Go 后端 (端口 8080)..."
+	cd server && go run main.go
+
+web:
+	@echo "🚀 启动 React 前端 (端口 5173)..."
+	cd web && npm run dev
+
+logs:
+	docker-compose logs -f
+
+clean:
+	@echo "🗑️  清理数据..."
+	docker-compose down -v
+	@echo "✓ 数据已清理"
