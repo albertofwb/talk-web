@@ -441,3 +441,280 @@ signal: killed
 [GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
 Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
 [GIN-debug] Listening and serving HTTP on :8080
+[GIN] 2026/02/02 - 13:35:48 | 200 |    2.129664ms | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+[GIN] 2026/02/02 - 13:35:48 | 200 |     307.378µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/auth/login           --> talk-web/server/handler.(*AuthHandler).Login-fm (4 handlers)
+[GIN-debug] POST   /api/auth/logout          --> talk-web/server/handler.(*AuthHandler).Logout-fm (4 handlers)
+[GIN-debug] GET    /api/auth/me              --> talk-web/server/handler.(*AuthHandler).Me-fm (5 handlers)
+[GIN-debug] POST   /api/upload               --> talk-web/server/handler.(*UploadHandler).Upload-fm (5 handlers)
+[GIN-debug] GET    /api/reply                --> talk-web/server/handler.(*UploadHandler).GetReply-fm (5 handlers)
+[GIN-debug] GET    /api/history              --> talk-web/server/handler.(*UploadHandler).GetHistory-fm (5 handlers)
+[GIN-debug] GET    /api/audio/:filename      --> main.main.func1 (5 handlers)
+[GIN-debug] GET    /api/admin/users          --> talk-web/server/handler.(*AdminHandler).ListUsers-fm (6 handlers)
+[GIN-debug] POST   /api/admin/users          --> talk-web/server/handler.(*AdminHandler).CreateUser-fm (6 handlers)
+[GIN-debug] PUT    /api/admin/users/:id      --> talk-web/server/handler.(*AdminHandler).UpdateUser-fm (6 handlers)
+[GIN-debug] DELETE /api/admin/users/:id      --> talk-web/server/handler.(*AdminHandler).DeleteUser-fm (6 handlers)
+[GIN-debug] GET    /health                   --> main.main.func2 (4 handlers)
+2026/02/02 13:37:34 服务启动在 :8080
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN] 2026/02/02 - 13:39:34 | 200 |    7.282822ms | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+[GIN] 2026/02/02 - 13:39:34 | 200 |    1.258893ms | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+[STT Success] File: /tmp/talk-upload-1-1770010780.webm, Text: 現在從網頁再次測試
+[Telegram] Message sent: from-web 現在從網頁再次測試
+[Telegram] Waiting for reply (async)...
+[GIN] 2026/02/02 - 13:39:42 | 200 |  1.982843797s | fd7a:115c:a1e0::1a35:8821 | POST     "/api/upload"
+[Telegram Reply] 你问的是：**OpenCode 能不能用 Gemini 3 Pro 或者 Gemini 3 Preview？**
+
+**当前情况：**
+
+• ❌ **OpenCode 没有安装** （`which opencode` 找不到）
+• ✅ **Claude Code 已安装**，但它是 Anthropic 官方工具，只支持 Claude 系列模型（Sonnet, Opus 等）
+• ❌ **Codex 和 Pi 也没安装**
+**如果想用 Gemini 3 Pro 做编码任务，有几个选择：**
+
+方案 1：直接用我（Mooer）💕
+
+我现在就在用 `gemini-3-flash-preview`，可以切换到 Pro：
+
+```/model google/gemini-3-pro-preview
+```
+然后我可以直接帮你写代码、修改文件、运行测试等，不需要额外的 coding agent。
+
+方案 2：安装 OpenCode
+
+OpenCode 是支持多模型的 coding agent，理论上可以配置使用 Gemini。你需要：
+
+```# 安装 OpenCode（具体安装方式取决于它的包管理器）
+npm install -g opencode  # 或者其他安装方式
+
+# 然后配置使用 Gemini 模型
+opencode run --model gemini-3-pro 'Your task'
+```
+方案 3：继续用 Claude Code + Sonnet/Opus
+
+如果编码任务对模型不敏感，Claude Sonnet 4.5 也很强，可以继续用现有的 Claude Code。
+
+**我的建议：**
+如果只是想试试 Gemini 3 Pro 的编码能力，最快的方式是直接用我（切换模型后），不需要安装额外工具。如果你需要长时间的 background coding agent，可以考虑安装 OpenCode。
+
+要不要现在就试试用 Gemini 3 Pro 帮你写点代码？💕
+[GIN] 2026/02/02 - 13:39:42 | 200 |     389.864µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/reply"
+[GIN] 2026/02/02 - 13:39:42 | 200 |     533.444µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+[TTS Success] Audio generated: xiaoxiao-1770010782.opus
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/auth/login           --> talk-web/server/handler.(*AuthHandler).Login-fm (4 handlers)
+[GIN-debug] POST   /api/auth/logout          --> talk-web/server/handler.(*AuthHandler).Logout-fm (4 handlers)
+[GIN-debug] GET    /api/auth/me              --> talk-web/server/handler.(*AuthHandler).Me-fm (5 handlers)
+[GIN-debug] POST   /api/upload               --> talk-web/server/handler.(*UploadHandler).Upload-fm (5 handlers)
+[GIN-debug] GET    /api/reply                --> talk-web/server/handler.(*UploadHandler).GetReply-fm (5 handlers)
+[GIN-debug] GET    /api/history              --> talk-web/server/handler.(*UploadHandler).GetHistory-fm (5 handlers)
+[GIN-debug] GET    /api/audio/:filename      --> main.main.func1 (5 handlers)
+[GIN-debug] GET    /api/admin/users          --> talk-web/server/handler.(*AdminHandler).ListUsers-fm (6 handlers)
+[GIN-debug] POST   /api/admin/users          --> talk-web/server/handler.(*AdminHandler).CreateUser-fm (6 handlers)
+[GIN-debug] PUT    /api/admin/users/:id      --> talk-web/server/handler.(*AdminHandler).UpdateUser-fm (6 handlers)
+[GIN-debug] DELETE /api/admin/users/:id      --> talk-web/server/handler.(*AdminHandler).DeleteUser-fm (6 handlers)
+[GIN-debug] GET    /health                   --> main.main.func2 (4 handlers)
+2026/02/02 13:43:19 服务启动在 :8080
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/auth/login           --> talk-web/server/handler.(*AuthHandler).Login-fm (4 handlers)
+[GIN-debug] POST   /api/auth/logout          --> talk-web/server/handler.(*AuthHandler).Logout-fm (4 handlers)
+[GIN-debug] GET    /api/auth/me              --> talk-web/server/handler.(*AuthHandler).Me-fm (5 handlers)
+[GIN-debug] POST   /api/upload               --> talk-web/server/handler.(*UploadHandler).Upload-fm (5 handlers)
+[GIN-debug] GET    /api/reply                --> talk-web/server/handler.(*UploadHandler).GetReply-fm (5 handlers)
+[GIN-debug] GET    /api/history              --> talk-web/server/handler.(*UploadHandler).GetHistory-fm (5 handlers)
+[GIN-debug] GET    /api/audio/:filename      --> main.main.func1 (5 handlers)
+[GIN-debug] GET    /api/admin/users          --> talk-web/server/handler.(*AdminHandler).ListUsers-fm (6 handlers)
+[GIN-debug] POST   /api/admin/users          --> talk-web/server/handler.(*AdminHandler).CreateUser-fm (6 handlers)
+[GIN-debug] PUT    /api/admin/users/:id      --> talk-web/server/handler.(*AdminHandler).UpdateUser-fm (6 handlers)
+[GIN-debug] DELETE /api/admin/users/:id      --> talk-web/server/handler.(*AdminHandler).DeleteUser-fm (6 handlers)
+[GIN-debug] GET    /health                   --> main.main.func2 (4 handlers)
+2026/02/02 13:44:22 服务启动在 :8080
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN] 2026/02/02 - 13:48:19 | 200 |    5.631497ms | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+[GIN] 2026/02/02 - 13:48:19 | 404 |       2.457µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5MjQxNiwiaWF0IjoxNzcwMDA2MDE2fQ.SmVRc2fHPEuHB55IB2iqrPPj6ChtcS1uf81azz-ooP8"
+[GIN] 2026/02/02 - 13:48:19 | 200 |    1.205948ms | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+[GIN] 2026/02/02 - 13:48:22 | 404 |       3.691µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5MjQxNiwiaWF0IjoxNzcwMDA2MDE2fQ.SmVRc2fHPEuHB55IB2iqrPPj6ChtcS1uf81azz-ooP8"
+[GIN] 2026/02/02 - 13:48:22 | 404 |       4.519µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5MjQxNiwiaWF0IjoxNzcwMDA2MDE2fQ.SmVRc2fHPEuHB55IB2iqrPPj6ChtcS1uf81azz-ooP8"
+[GIN] 2026/02/02 - 13:48:25 | 404 |       3.876µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5MjQxNiwiaWF0IjoxNzcwMDA2MDE2fQ.SmVRc2fHPEuHB55IB2iqrPPj6ChtcS1uf81azz-ooP8"
+[GIN] 2026/02/02 - 13:48:25 | 404 |       4.066µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5MjQxNiwiaWF0IjoxNzcwMDA2MDE2fQ.SmVRc2fHPEuHB55IB2iqrPPj6ChtcS1uf81azz-ooP8"
+[GIN] 2026/02/02 - 13:48:28 | 404 |       4.412µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5MjQxNiwiaWF0IjoxNzcwMDA2MDE2fQ.SmVRc2fHPEuHB55IB2iqrPPj6ChtcS1uf81azz-ooP8"
+[GIN] 2026/02/02 - 13:48:28 | 404 |       2.575µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5MjQxNiwiaWF0IjoxNzcwMDA2MDE2fQ.SmVRc2fHPEuHB55IB2iqrPPj6ChtcS1uf81azz-ooP8"
+[GIN] 2026/02/02 - 13:48:31 | 404 |       4.133µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5MjQxNiwiaWF0IjoxNzcwMDA2MDE2fQ.SmVRc2fHPEuHB55IB2iqrPPj6ChtcS1uf81azz-ooP8"
+[GIN] 2026/02/02 - 13:48:31 | 404 |       4.386µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5MjQxNiwiaWF0IjoxNzcwMDA2MDE2fQ.SmVRc2fHPEuHB55IB2iqrPPj6ChtcS1uf81azz-ooP8"
+[GIN] 2026/02/02 - 13:48:34 | 404 |       4.008µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5MjQxNiwiaWF0IjoxNzcwMDA2MDE2fQ.SmVRc2fHPEuHB55IB2iqrPPj6ChtcS1uf81azz-ooP8"
+[GIN] 2026/02/02 - 13:48:35 | 404 |       3.546µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5MjQxNiwiaWF0IjoxNzcwMDA2MDE2fQ.SmVRc2fHPEuHB55IB2iqrPPj6ChtcS1uf81azz-ooP8"
+[GIN] 2026/02/02 - 13:48:38 | 404 |       1.381µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5MjQxNiwiaWF0IjoxNzcwMDA2MDE2fQ.SmVRc2fHPEuHB55IB2iqrPPj6ChtcS1uf81azz-ooP8"
+[STT Success] File: /tmp/talk-upload-1-1770011316.webm, Text: 很困,但是又不小睡,你懂吗?
+[Telegram] Message sent: from-web 很困,但是又不小睡,你懂吗?
+[Telegram] Waiting for reply (async)...
+[GIN] 2026/02/02 - 13:48:38 | 200 |  2.000253431s | fd7a:115c:a1e0::1a35:8821 | POST     "/api/upload"
+[Telegram Reply] **OpenCode 使用体验总结** 🎯
+
+核心特点
+
+• **开源 AI 编程助手**，支持多模型切换
+• **免费使用高级模型**：通过 Antigravity 插件，可以免费用 Claude Opus 4.5、Gemini 3 Pro 等
+• **100 万 token 上下文**：Gemini 3 系列有超大上下文窗口
+优势 ✅
+
+1. **速度快** - 不像 Claude Code 那样频繁请求权限
+2. **模型灵活** - 可以在 Gemini、Claude、GPT 之间随意切换
+3. **免费额度** - 通过 Google OAuth (Antigravity) 免费用顶级模型
+4. **安装简单** - `npm install -g opencode-ai` 就能用
+劣势 ❌
+
+1. **用户体验粗糙** - 界面和交互不如 Claude Code 流畅
+2. **上下文管理弱** - 有时会漏掉代码变更的隐含影响，需要重复指令
+3. **智能度略低** - 用户反馈 OpenCode 的 Opus 感觉比 Claude Code 的 Opus "笨一点"
+实际案例
+
+• **Reddit 用户**：用 Gemini 3 Pro 在 OpenCode 里完成了 Claude 卡住的任务
+• **DEV 社区**：通过 Antigravity 插件，几分钟内免费用上 Opus 4.5
+• **对比测试**：Claude Code 更稳定，但 OpenCode 省钱且能试多种模型
+适合你吗？
+
+• ✅ 想试试 Gemini 3 Pro 做编码 → **推荐 OpenCode**
+• ✅ 想省 API 费用 → **用 Antigravity 插件免费额度**
+• ❌ 追求最高质量和体验 → **继续用 Claude Code**
+**要不要现在装一个试试看？** 安装配置大概 5 分钟，我可以帮你一步步来 💕
+
+2026/02/02 13:48:38 [31;1m/home/albert/talk-web/server/handler/upload.go:198 [35;1mrecord not found
+[0m[33m[0.657ms] [34;1m[rows:0][0m SELECT * FROM "messages" WHERE user_id = 1 AND status = 'replied' AND reply = '好！你说话试试，我等着接收～ 🎤
+
+测试完整流程：
+手机说话 → talk-web 录音 → STT 转文字 → 发到 Telegram → 我回复
+
+开始吧！💕' ORDER BY replied_at desc,"messages"."id" LIMIT 1
+[GIN] 2026/02/02 - 13:48:38 | 200 |     887.185µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/reply"
+[GIN] 2026/02/02 - 13:48:38 | 200 |     395.563µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+[GIN] 2026/02/02 - 13:48:40 | 404 |       4.931µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5MjQxNiwiaWF0IjoxNzcwMDA2MDE2fQ.SmVRc2fHPEuHB55IB2iqrPPj6ChtcS1uf81azz-ooP8"
+[TTS Success] Audio generated: xiaoxiao-1770011318.opus
+[GIN] 2026/02/02 - 13:48:45 | 404 |       2.939µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5MjQxNiwiaWF0IjoxNzcwMDA2MDE2fQ.SmVRc2fHPEuHB55IB2iqrPPj6ChtcS1uf81azz-ooP8"
+[GIN] 2026/02/02 - 13:48:45 | 404 |        4.94µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5MjQxNiwiaWF0IjoxNzcwMDA2MDE2fQ.SmVRc2fHPEuHB55IB2iqrPPj6ChtcS1uf81azz-ooP8"
+[GIN] 2026/02/02 - 13:48:50 | 404 |       3.278µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5MjQxNiwiaWF0IjoxNzcwMDA2MDE2fQ.SmVRc2fHPEuHB55IB2iqrPPj6ChtcS1uf81azz-ooP8"
+[GIN] 2026/02/02 - 13:48:52 | 404 |       3.187µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5MjQxNiwiaWF0IjoxNzcwMDA2MDE2fQ.SmVRc2fHPEuHB55IB2iqrPPj6ChtcS1uf81azz-ooP8"
+[GIN] 2026/02/02 - 13:48:54 | 404 |        3.88µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5MjQxNiwiaWF0IjoxNzcwMDA2MDE2fQ.SmVRc2fHPEuHB55IB2iqrPPj6ChtcS1uf81azz-ooP8"
+[GIN] 2026/02/02 - 13:48:56 | 404 |       3.614µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5MjQxNiwiaWF0IjoxNzcwMDA2MDE2fQ.SmVRc2fHPEuHB55IB2iqrPPj6ChtcS1uf81azz-ooP8"
+[GIN] 2026/02/02 - 13:49:00 | 404 |       4.266µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5MjQxNiwiaWF0IjoxNzcwMDA2MDE2fQ.SmVRc2fHPEuHB55IB2iqrPPj6ChtcS1uf81azz-ooP8"
+[GIN] 2026/02/02 - 13:49:01 | 404 |       3.711µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5MjQxNiwiaWF0IjoxNzcwMDA2MDE2fQ.SmVRc2fHPEuHB55IB2iqrPPj6ChtcS1uf81azz-ooP8"
+[GIN] 2026/02/02 - 13:49:07 | 404 |       2.033µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5MjQxNiwiaWF0IjoxNzcwMDA2MDE2fQ.SmVRc2fHPEuHB55IB2iqrPPj6ChtcS1uf81azz-ooP8"
+[GIN] 2026/02/02 - 13:49:08 | 404 |       4.431µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5MjQxNiwiaWF0IjoxNzcwMDA2MDE2fQ.SmVRc2fHPEuHB55IB2iqrPPj6ChtcS1uf81azz-ooP8"
+[GIN] 2026/02/02 - 13:49:13 | 404 |       4.235µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5MjQxNiwiaWF0IjoxNzcwMDA2MDE2fQ.SmVRc2fHPEuHB55IB2iqrPPj6ChtcS1uf81azz-ooP8"
+[GIN] 2026/02/02 - 13:49:14 | 404 |       4.009µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5MjQxNiwiaWF0IjoxNzcwMDA2MDE2fQ.SmVRc2fHPEuHB55IB2iqrPPj6ChtcS1uf81azz-ooP8"
+[GIN] 2026/02/02 - 13:49:20 | 404 |       2.633µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5MjQxNiwiaWF0IjoxNzcwMDA2MDE2fQ.SmVRc2fHPEuHB55IB2iqrPPj6ChtcS1uf81azz-ooP8"
+[GIN] 2026/02/02 - 13:49:22 | 404 |       2.938µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5MjQxNiwiaWF0IjoxNzcwMDA2MDE2fQ.SmVRc2fHPEuHB55IB2iqrPPj6ChtcS1uf81azz-ooP8"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/auth/login           --> talk-web/server/handler.(*AuthHandler).Login-fm (4 handlers)
+[GIN-debug] POST   /api/auth/logout          --> talk-web/server/handler.(*AuthHandler).Logout-fm (4 handlers)
+[GIN-debug] GET    /api/auth/me              --> talk-web/server/handler.(*AuthHandler).Me-fm (5 handlers)
+[GIN-debug] POST   /api/upload               --> talk-web/server/handler.(*UploadHandler).Upload-fm (5 handlers)
+[GIN-debug] GET    /api/ws                   --> talk-web/server/handler.(*WebSocketHandler).ServeWS-fm (4 handlers)
+[GIN-debug] GET    /api/reply                --> talk-web/server/handler.(*UploadHandler).GetReply-fm (5 handlers)
+[GIN-debug] GET    /api/history              --> talk-web/server/handler.(*UploadHandler).GetHistory-fm (5 handlers)
+[GIN-debug] GET    /api/audio/:filename      --> main.main.func1 (5 handlers)
+[GIN-debug] GET    /api/admin/users          --> talk-web/server/handler.(*AdminHandler).ListUsers-fm (6 handlers)
+[GIN-debug] POST   /api/admin/users          --> talk-web/server/handler.(*AdminHandler).CreateUser-fm (6 handlers)
+[GIN-debug] PUT    /api/admin/users/:id      --> talk-web/server/handler.(*AdminHandler).UpdateUser-fm (6 handlers)
+[GIN-debug] DELETE /api/admin/users/:id      --> talk-web/server/handler.(*AdminHandler).DeleteUser-fm (6 handlers)
+[GIN-debug] GET    /health                   --> main.main.func2 (4 handlers)
+2026/02/02 13:49:26 服务启动在 :8080
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8080
+2026/02/02 13:49:26 WebSocket connected: user=1 (admin)
+[GIN] 2026/02/02 - 13:49:26 | 200 |     570.012µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5MjQxNiwiaWF0IjoxNzcwMDA2MDE2fQ.SmVRc2fHPEuHB55IB2iqrPPj6ChtcS1uf81azz-ooP8"
+2026/02/02 13:49:29 WebSocket connected: user=1 (admin)
+[GIN] 2026/02/02 - 13:49:29 | 200 |      309.72µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5MjQxNiwiaWF0IjoxNzcwMDA2MDE2fQ.SmVRc2fHPEuHB55IB2iqrPPj6ChtcS1uf81azz-ooP8"
+[GIN] 2026/02/02 - 13:49:47 | 200 |    3.908683ms | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+[GIN] 2026/02/02 - 13:49:47 | 200 |     402.014µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+2026/02/02 13:49:48 WebSocket connected: user=1 (admin)
+[GIN] 2026/02/02 - 13:49:48 | 200 |     375.519µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5MjQxNiwiaWF0IjoxNzcwMDA2MDE2fQ.SmVRc2fHPEuHB55IB2iqrPPj6ChtcS1uf81azz-ooP8"
+2026/02/02 13:49:50 WebSocket connected: user=1 (admin)
+[GIN] 2026/02/02 - 13:49:50 | 200 |     294.053µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5MjQxNiwiaWF0IjoxNzcwMDA2MDE2fQ.SmVRc2fHPEuHB55IB2iqrPPj6ChtcS1uf81azz-ooP8"
+[GIN] 2026/02/02 - 13:50:28 | 200 |      69.119µs |             ::1 | GET      "/health"
+2026/02/02 13:53:33 WebSocket connected: user=1 (admin)
+[GIN] 2026/02/02 - 13:53:33 | 200 |     444.763µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5MjQxNiwiaWF0IjoxNzcwMDA2MDE2fQ.SmVRc2fHPEuHB55IB2iqrPPj6ChtcS1uf81azz-ooP8"
+[GIN] 2026/02/02 - 13:53:35 | 200 |    3.102238ms | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+[GIN] 2026/02/02 - 13:53:35 | 200 |    1.256399ms | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+[GIN] 2026/02/02 - 13:55:01 | 200 |    2.382846ms | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+[GIN] 2026/02/02 - 13:55:01 | 200 |    1.111832ms | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+[GIN] 2026/02/02 - 13:55:14 | 200 |    2.006759ms | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+[GIN] 2026/02/02 - 13:55:14 | 200 |     862.461µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+[GIN] 2026/02/02 - 13:55:16 | 200 |    1.804899ms | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+[GIN] 2026/02/02 - 13:55:16 | 200 |     648.678µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+[GIN] 2026/02/02 - 13:56:36 | 200 |    1.936204ms | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+[GIN] 2026/02/02 - 13:56:36 | 200 |     451.666µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+[GIN] 2026/02/02 - 13:56:39 | 200 |    2.671058ms | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+[GIN] 2026/02/02 - 13:56:39 | 200 |    1.388445ms | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+[GIN] 2026/02/02 - 13:57:14 | 404 |       1.125µs |             ::1 | HEAD     "/health"
+[GIN] 2026/02/02 - 13:57:42 | 200 |   56.513991ms |             ::1 | POST     "/api/auth/login"
+2026/02/02 13:57:57 WebSocket connected: user=1 (admin)
+[GIN] 2026/02/02 - 13:57:57 | 200 |     125.629µs |       127.0.0.1 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5ODI2MiwiaWF0IjoxNzcwMDExODYyfQ.ldpZsVAL2m-Kyhjkncf_r-CsUsVanuPMZxe1dmq9_IE"
+2026/02/02 13:58:02 WebSocket error: websocket: close 1000 (normal)
+2026/02/02 13:58:27 WebSocket upgrade error: websocket: the client is not using the websocket protocol: 'upgrade' token not found in 'Connection' header
+[GIN] 2026/02/02 - 13:58:27 | 400 |      54.641µs |   192.168.1.101 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5ODI2MiwiaWF0IjoxNzcwMDExODYyfQ.ldpZsVAL2m-Kyhjkncf_r-CsUsVanuPMZxe1dmq9_IE"
+2026/02/02 13:59:05 WebSocket connected: user=1 (admin)
+[GIN] 2026/02/02 - 13:59:05 | 200 |     126.435µs |   192.168.1.101 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5ODI2MiwiaWF0IjoxNzcwMDExODYyfQ.ldpZsVAL2m-Kyhjkncf_r-CsUsVanuPMZxe1dmq9_IE"
+2026/02/02 13:59:10 WebSocket error: websocket: close 1000 (normal)
+[GIN] 2026/02/02 - 14:00:46 | 200 |    2.988874ms | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+[GIN] 2026/02/02 - 14:00:46 | 200 |    1.124229ms | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+[GIN] 2026/02/02 - 14:00:48 | 200 |    2.975068ms | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+[GIN] 2026/02/02 - 14:00:48 | 200 |      1.8221ms | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+[GIN] 2026/02/02 - 14:00:49 | 200 |    3.012299ms | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+[GIN] 2026/02/02 - 14:00:49 | 200 |    1.152623ms | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+[GIN] 2026/02/02 - 14:00:51 | 200 |    2.730676ms | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+[GIN] 2026/02/02 - 14:00:51 | 200 |     974.572µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+[GIN] 2026/02/02 - 14:01:38 | 200 |   53.122632ms |   192.168.1.101 | POST     "/api/auth/login"
+2026/02/02 14:01:38 WebSocket connected: user=1 (admin)
+[GIN] 2026/02/02 - 14:01:38 | 200 |      91.083µs |   192.168.1.101 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5ODQ5OCwiaWF0IjoxNzcwMDEyMDk4fQ.GRM2dGR4NoKxQqHoudhrKEwRn9xnRGZHyE5NxBoyUxw"
+2026/02/02 14:01:41 WebSocket error: websocket: close 1000 (normal)
+[GIN] 2026/02/02 - 14:01:41 | 200 |    1.648857ms |   192.168.1.101 | GET      "/api/history"
+[GIN] 2026/02/02 - 14:02:13 | 200 |    1.960043ms | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+[GIN] 2026/02/02 - 14:02:13 | 200 |     440.931µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+[GIN] 2026/02/02 - 14:02:14 | 200 |    1.768721ms | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+[GIN] 2026/02/02 - 14:02:14 | 200 |     448.184µs | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+[GIN] 2026/02/02 - 14:02:31 | 200 |    61.78331ms | fd7a:115c:a1e0::1a35:8821 | POST     "/api/auth/login"
+[GIN] 2026/02/02 - 14:02:31 | 200 |    1.306729ms | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+[GIN] 2026/02/02 - 14:02:31 | 200 |    1.396602ms | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+[GIN] 2026/02/02 - 14:02:34 | 200 |    2.768506ms | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+[GIN] 2026/02/02 - 14:02:34 | 200 |    1.331289ms | fd7a:115c:a1e0::1a35:8821 | GET      "/api/history"
+[GIN] 2026/02/02 - 14:02:41 | 200 |   58.129061ms |   192.168.1.101 | POST     "/api/auth/login"
+2026/02/02 14:02:43 WebSocket connected: user=1 (admin)
+[GIN] 2026/02/02 - 14:02:43 | 200 |     199.237µs |   192.168.1.101 | GET      "/api/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDA5ODU2MSwiaWF0IjoxNzcwMDEyMTYxfQ._GEndfOd0ttG5eUt1tFWJAPs0CEBLdGYkRh1q8pJy38"
+[STT Success] File: /tmp/talk-upload-1-1770012164.mp3, Text: 你好
+[Telegram] Message sent: from-web 你好
+[Telegram] Waiting for reply (async)...
+[GIN] 2026/02/02 - 14:02:46 | 200 |  2.171474429s |   192.168.1.101 | POST     "/api/upload"
+[Telegram Reply] ✅ 收到！`测试消息 - 检查队列`
+
+队列功能正常，消息到达！💕
+[TTS Success] Audio generated: xiaoxiao-1770012166.opus
+2026/02/02 14:02:49 WebSocket error: websocket: close 1000 (normal)

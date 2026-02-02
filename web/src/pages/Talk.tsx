@@ -53,12 +53,9 @@ export default function Talk() {
       wsReconnectTimerRef.current = null
     }
 
-    // 开发环境：连接到后端服务器 (localhost:8080)
-    // 生产环境：使用当前页面的 host
-    const isDev = import.meta.env.DEV
+    // 使用当前页面的 host（适配开发和生产环境）
     const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:'
-    const host = isDev ? 'localhost:8080' : window.location.host
-    const wsUrl = `${protocol}//${host}/api/ws?token=${token}`
+    const wsUrl = `${protocol}//${window.location.host}/api/ws?token=${token}`
 
     console.log('连接 WebSocket:', wsUrl, `(尝试 ${wsReconnectAttemptsRef.current + 1})`)
     const ws = new WebSocket(wsUrl)
