@@ -80,11 +80,9 @@ export default function Talk() {
           // 刷新历史
           loadHistory()
 
-          // 播放音频
+          // 播放音频（需要带 token 下载）
           if (reply_audio) {
-            const audio = new Audio(reply_audio)
-            audio.play().catch(err => console.error('播放失败:', err))
-            console.log('播放音频:', reply_audio)
+            playAudio(reply_audio)
           }
         }
       } catch (err) {
@@ -309,11 +307,7 @@ export default function Talk() {
 
           // 播放 TTS 音频
           if (reply_audio) {
-            const audio = new Audio(reply_audio)
-            audio.play().catch(err => {
-              console.error('播放音频失败:', err)
-            })
-            console.log('播放音频:', reply_audio)
+            playAudio(reply_audio)
           } else {
             console.log('收到回复但没有音频:', reply)
           }
@@ -340,6 +334,36 @@ export default function Talk() {
       setMessage('')
       setMessageType('')
     }, 3000)
+  }
+
+  // 播放音频（带认证）
+  const playAudio = async (audioUrl: string) => {
+    try {
+      console.log('播放音频:', audioUrl)
+
+      // 使用 api 实例下载音频（自动携带 token）
+      const response = await api.get(audioUrl, {
+        responseType: 'blob'
+      })
+
+      // 创建 Blob URL
+      const blob = new Blob([response.data], { type: 'audio/opus' })
+      const blobUrl = URL.createObjectURL(blob)
+
+      // 播放
+      const audio = new Audio(blobUrl)
+      audio.onended = () => {
+        URL.revokeObjectURL(blobUrl) // 清理 Blob URL
+      }
+      audio.onerror = (err) => {
+        console.error('音频播放失败:', err)
+        URL.revokeObjectURL(blobUrl)
+      }
+      await audio.play()
+      console.log('✓ 音频播放成功')
+    } catch (err) {
+      console.error('下载或播放音频失败:', err)
+    }
   }
 
   return (
