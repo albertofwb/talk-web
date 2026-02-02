@@ -137,8 +137,21 @@ func (h *UploadHandler) Upload(c *gin.Context) {
 		replyText := replyMsg.Text
 		fmt.Printf("[Telegram Reply] %s\n", replyText)
 
-		// TTS: 文字转语音
-		replyAudioPath, err := h.tts.Generate(replyText)
+		// 只处理 to-web 开头的回复
+		const prefix = "to-web "
+		shouldPushToWeb := len(replyText) >= len(prefix) && replyText[:len(prefix)] == prefix
+
+		// 去掉前缀用于显示和 TTS
+		displayText := replyText
+		if shouldPushToWeb {
+			displayText = replyText[len(prefix):]
+			fmt.Printf("[Telegram] 检测到 to-web 消息，将推送到前端\n")
+		} else {
+			fmt.Printf("[Telegram] 非 to-web 消息，仅更新数据库\n")
+		}
+
+		// TTS: 文字转语音（使用去掉前缀的文本）
+		replyAudioPath, err := h.tts.Generate(displayText)
 		audioURL := ""
 		if err != nil {
 			fmt.Printf("[TTS Error] Failed to generate: %v\n", err)
@@ -148,20 +161,22 @@ func (h *UploadHandler) Upload(c *gin.Context) {
 			fmt.Printf("[TTS Success] Audio generated: %s\n", audioFilename)
 		}
 
-		// 更新数据库记录
+		// 更新数据库记录（保存去掉前缀的文本）
 		now := time.Now()
 		h.db.Model(&message).Updates(map[string]interface{}{
-			"reply":       replyText,
+			"reply":       displayText,
 			"reply_audio": audioURL,
 			"status":      "replied",
 			"replied_at":  now,
 		})
 
-		// 通过 WebSocket 推送回复给用户
-		h.hub.SendToUser(userID, "reply", map[string]interface{}{
-			"reply":       replyText,
-			"reply_audio": audioURL,
-		})
+		// 只有 to-web 消息才推送到前端
+		if shouldPushToWeb {
+			h.hub.SendToUser(userID, "reply", map[string]interface{}{
+				"reply":       displayText,
+				"reply_audio": audioURL,
+			})
+		}
 	}()
 }
 
